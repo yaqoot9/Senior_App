@@ -7,7 +7,7 @@ class register extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
-        '/RegisterPage': (BuildContext context) => LoginPage(),
+        '/LoginPage': (BuildContext context) => LoginPage(),
       },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -39,8 +39,9 @@ class _registerpageState extends State<registerpage> {
         color: Colors.lime[100],
         child:Center(
           child: Column(children: [
-           Text("Create your an account"),
-            Padding(padding: EdgeInsets.all(7)),
+            Padding(padding: EdgeInsets.all(10)),
+           Text("Create an account",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+            Padding(padding: EdgeInsets.all(10)),
             Form(key: _formKey,
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +66,8 @@ class _registerpageState extends State<registerpage> {
                       },
 
                     ),),
-                  Padding(padding: EdgeInsets.only(top: 8)),
+
+                  Padding(padding: EdgeInsets.all(5)),
                   ConstrainedBox(constraints: BoxConstraints.tightFor(width: 300) ,
                     child:  TextFormField(
                       controller: _emailController,
@@ -87,7 +89,7 @@ class _registerpageState extends State<registerpage> {
 
                     ),),
 
-                  Padding(padding: EdgeInsets.all(10),),
+                  Padding(padding: EdgeInsets.all(5)),
                   ConstrainedBox(constraints: BoxConstraints.tightFor(width: 300)
                     ,child:TextFormField(
                         controller: _passwordController,
@@ -123,17 +125,54 @@ class _registerpageState extends State<registerpage> {
 
 
                     ) ,),
-                  Padding(padding: EdgeInsets.only(top: 8)),
+
+                  Padding(padding: EdgeInsets.all(5)),
+                  ConstrainedBox(constraints: BoxConstraints.tightFor(width: 300)
+                    ,child:TextFormField(
+                        controller: _passwordController,
+                        obscureText: isSecure,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          suffixIcon:GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  isSecure=!isSecure;
+                                });
+                              },
+                              child:Icon(isSecure? Icons.visibility: Icons.visibility_off)
+
+                          ) ,
+
+                          border:OutlineInputBorder(),
+                          hintText: 'confirm password',
+                          labelText: 'confirm password',
+
+                        ),
+                        validator: (String? val) {
+                          if(val==null||val.isEmpty)
+                            return "Please enter password";
+                          else if (val.length<8){
+                            return "Password should be more than 8";
+                          }
+                          else
+                            return null;
+                        }
+
+
+
+                    ) ,),
+                  Padding(padding: EdgeInsets.all(5)),
                   ConstrainedBox(constraints:  BoxConstraints.tightFor(width: 290),child:   ElevatedButton(
                       style:ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.green[900]!)),
                       onPressed:(){
                         if(_formKey.currentState!.validate()){
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(password)));
                         }
-                      }, child: Text('login')
+                      }, child: Text('register')
                   ), ),
 
-                  TextButton(child: Text("Dont have an account ? Sign up",style: TextStyle(color: Colors.black),),onPressed: () => Navigator.pushNamed(context,'/RegisterPage',))
+                  TextButton(child: Text("Already have an account ? Sign in",style: TextStyle(color: Colors.black),),onPressed: () => Navigator.pushNamed(context,'/LoginPage',))
                 ],
               )
               ,)
