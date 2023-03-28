@@ -1,4 +1,5 @@
 import 'package:firstapp/Register.dart';
+import 'package:firstapp/home.dart';
 import 'package:flutter/material.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class LoginPage extends StatelessWidget {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/RegisterPage':(BuildContext context) =>register(),
+        '/HomePage':(BuildContext context) =>Home(),
       },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -38,6 +40,7 @@ class _loginState extends State<login> {
       color: Colors.lime[100],
 child:Center(
       child: Column(children: [
+        Padding(padding: EdgeInsets.all(15)),
         Container(width: 500
           ,height: 200,
           child: Image.asset('assets/plantCover.jpg',),),
@@ -108,7 +111,7 @@ child:Center(
       style:ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.green[900]!)),
       onPressed:(){
         if(_formKey.currentState!.validate()){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(password)));
+          Navigator.pushNamed(context,'/HomePage',);
         }
       }, child: Text('login')
   ), ),
