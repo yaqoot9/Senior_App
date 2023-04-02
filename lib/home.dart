@@ -1,7 +1,10 @@
+import 'package:firstapp/Details.dart';
+import 'package:firstapp/Login.dart';
+import 'package:firstapp/homepage.dart';
 import 'package:firstapp/notification.dart';
-import 'package:firstapp/widegts.dart';
+import 'package:firstapp/programs.dart';
 import'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
   @override
@@ -9,40 +12,12 @@ class Home extends StatelessWidget {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/NotificationPage':(BuildContext context) =>notificationpage (),
+        '/DeteilsPage':(BuildContext context)=>detailsPage(),
+        '/login':(BuildContext context)=>LoginPage(),
+        '/myprogram':(BuildContext context)=>programmsPage(),
       },
       debugShowCheckedModeBanner: false,
-     home: Scaffold(
-       appBar:AppBar(
-         actions: [
-           Builder(
-             builder: (BuildContext context) {
-             return IconButton(
-                   icon: const Icon(Icons.notifications,color: Colors.black54,size: 35,),
-                   tooltip: 'Open notification',
-                   onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
-                   }
-               );
-             },
-           ),
-
-         ],
-         backgroundColor: Colors.lime[100],leading: Builder(
-         builder: (BuildContext context) {
-           return IconButton(
-             icon: const Icon(Icons.account_circle,color: Colors.black54,size: 35,),
-             onPressed: () { Scaffold.of(context).openDrawer(); },
-             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-           );
-         },
-       ),
-         leadingWidth: 105,
-       title:
-         Text("fresh your plant",style: TextStyle(color: Colors.black54,fontSize: 18),),
-
-       centerTitle: true,),
-
-       body: HomePage(),
-     ),
+     home:HomePage()
     );
   }
 }
@@ -54,45 +29,125 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int index =0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+
+  final List<Widget>screens=[
+    homepage(),
+    notificationpage (),
+    programmsPage(),
+
+  ];
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      SizedBox(
-        height: 5,
-      ),
-      TextField(
-        //onChanged: (value) => _runFilter(value),
-        decoration: InputDecoration(
-            labelText: 'Search', suffixIcon: Icon(Icons.search)),
-      ),
-      const SizedBox(
-        height: 5,
-      ),
-      CarouselSlider(
-        items: [
-          //first item
-          SpecificsCard( pump_color: Colors.red,pump_name: 'First Pump',img:'https://th.bing.com/th/id/R.166c0ac31bf882dd621aeb1b996a677b?rik=5Ozv3loNIkqqAw&pid=ImgRaw&r=0' ,),
-         //second item
-         SpecificsCard( pump_color: Colors.green,pump_name: 'Second Pump',img:'https://th.bing.com/th/id/R.7af6ae3e44c15c54cdb64c87c54618cf?rik=nLdhmLD5MmoC7Q&pid=ImgRaw&r=0'),
-          //third item
-    SpecificsCard( pump_color: Colors.red,pump_name: 'Third Pump',img:'https://th.bing.com/th/id/R.35b6035b41dbeeaa2181d1729b3451a6?rik=7MV8WP9x5qE3oA&pid=ImgRaw&r=0')
+return  Scaffold(
+  bottomNavigationBar:CurvedNavigationBar(
+    key: _bottomNavigationKey,
+    index: index,
+    height: 60.0,
+    items: <Widget>[
+    Icon(Icons.home, size: 30,color: Colors.lightGreen[600],),
+    Icon(Icons.notifications, size: 30,color: Colors.lightGreen[600]),
+    Icon(Icons.date_range, size: 30,color: Colors.lightGreen[600]),
+    ],
+    color: Color(0xFFF0F4C3),
+    buttonBackgroundColor: Colors.white,
+    backgroundColor: Colors.white,
+    animationCurve: Curves.easeInOut,
+    animationDuration: Duration(milliseconds: 300),
+    onTap: (index) {
+      setState(() {
+        this.index= index;
+      });
+    },
 
-        ],
+  ),
 
-        //Slider Container properties
-        options: CarouselOptions(
-          height: 170.0,
-          enlargeCenterPage: true,
-          autoPlay: true,
-          aspectRatio: 16 / 9,
-          autoPlayCurve: Curves.easeInSine,
-          enableInfiniteScroll: true,
-          autoPlayAnimationDuration: Duration(milliseconds: 730),
-          viewportFraction: 0.8,
-        ),
+
+  drawer: Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(decoration: BoxDecoration(),child: Center(
+          child: Column(children: [
+            CircleAvatar(
+              radius: 40, // Image radius
+              backgroundImage: NetworkImage("https://th.bing.com/th/id/OIP.K7lG3005eY-tEHwlxf61qgHaFx?pid=ImgDet&rs=1"),
+            ),
+            Text("Ahmad Awad",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+            Text("Ahmad@gmail.com")
+          ],),
+        ),),
+
+        Builder(builder: (context)=>ListTile(
+          leading: Icon(Icons.person),
+          title: Text("User information"),
+          // onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+        )),
+
+        Builder(builder: (context)=>
+            ListTile(
+                leading: Icon(Icons.date_range),
+                title: Text("My programs"),
+                onTap:() {Navigator.pushNamed(context,'/myprogram');}
+            )),
+
+        Builder(builder: (context)=>ListTile(
+            leading: Icon(Icons.notifications),
+            title: Text("Notification"),
+            onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+        )),
+
+
+        Builder(builder: (context)=>ListTile(
+          leading: Icon(Icons.help),
+          title: Text("Help"),
+          // onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+        ) ) ,
+
+        Builder(builder: (context)=>ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Logout"),
+            onTap:() {Navigator.pushNamed(context,'/login');}
+        ) ),
+      ],
+    ),
+  ),
+
+  appBar:AppBar(
+    actions: [
+      Builder(
+        builder: (BuildContext context) {
+          return IconButton(
+              icon: const Icon(Icons.notifications,color:Color(0XFF7CB342),size: 35,),
+              tooltip: 'Open notification',
+              onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
+              }
+          );
+        },
       ),
 
-    ],);
+    ],
+    backgroundColor: Colors.lime[100],leading: Builder(
+    builder: (BuildContext context) {
+      return IconButton(
+        icon: const Icon(Icons.account_circle,color: Color(0XFF7CB342),size: 35,),
+        onPressed: () { Scaffold.of(context).openDrawer(); },
+        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      );
+    },
+  ),
+    leadingWidth: 105,
+    title:
+    Text("fresh your plant",style: TextStyle(color: Colors.black54,fontSize: 18),),
+
+    centerTitle: true,),
+
+  body: screens.elementAt(index),
+);
   }
 }
 

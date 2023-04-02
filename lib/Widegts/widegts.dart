@@ -17,14 +17,15 @@ class SpecificsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.lime[100],
         border: Border.all(
-          width: 2,),
+          width: 0.9,
+        color: Colors.brown),
         borderRadius: BorderRadius.circular(10.0),
       ),
 
     child:
     Column(children: [
       Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,children: [
-        Text(pump_name,style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),),
+        Text(pump_name,style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold,color: Colors.brown),),
         Container(
           width: 18,
           height: 18,
@@ -34,10 +35,12 @@ class SpecificsCard extends StatelessWidget {
       SizedBox(height: 40,)
     ],)
     ),
+    Positioned(child:Icon(Icons.lock_outline),top: 128,left: 20, ),
+
     Positioned(
     top:45,left: 193,
       child:
-    GestureDetector(onDoubleTap: null,
+    GestureDetector(onDoubleTap: (){Navigator.pushNamed(context,'/DeteilsPage');},
       child: CircleAvatar(
       radius: 60, // Image radius
       backgroundImage: NetworkImage(img),
