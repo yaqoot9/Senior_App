@@ -49,9 +49,9 @@ return  Scaffold(
     index: index,
     height: 60.0,
     items: <Widget>[
-    Icon(Icons.home, size: 30,color: Colors.lightGreen[600],),
-    Icon(Icons.notifications, size: 30,color: Colors.lightGreen[600]),
-    Icon(Icons.date_range, size: 30,color: Colors.lightGreen[600]),
+    Icon(Icons.home, size: 30,color: Colors.black,),
+    Icon(Icons.notifications, size: 30,color: Colors.black),
+    Icon(Icons.date_range, size: 30,color: Colors.black),
     ],
     color: Color(0xFFF0F4C3),
     buttonBackgroundColor: Colors.white,
@@ -122,7 +122,7 @@ return  Scaffold(
       Builder(
         builder: (BuildContext context) {
           return IconButton(
-              icon: const Icon(Icons.notifications,color:Color(0XFF7CB342),size: 35,),
+              icon: const Icon(Icons.notifications,color:Colors.black,size: 35,),
               tooltip: 'Open notification',
               onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
               }
@@ -134,7 +134,7 @@ return  Scaffold(
     backgroundColor: Colors.lime[100],leading: Builder(
     builder: (BuildContext context) {
       return IconButton(
-        icon: const Icon(Icons.account_circle,color: Color(0XFF7CB342),size: 35,),
+        icon: const Icon(Icons.account_circle,color:Colors.black,size: 35,),
         onPressed: () { Scaffold.of(context).openDrawer(); },
         tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
       );
@@ -142,7 +142,7 @@ return  Scaffold(
   ),
     leadingWidth: 105,
     title:
-    Text("fresh your plant",style: TextStyle(color: Colors.black54,fontSize: 18),),
+    Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),
 
     centerTitle: true,),
 

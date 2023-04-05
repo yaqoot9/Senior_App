@@ -52,15 +52,43 @@ class _homepageState extends State<homepage> {
             viewportFraction: 0.8,
           ),
         ),
-        SizedBox(height: 6,),
+        SizedBox(height: 5,),
         Text("     _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _",style: TextStyle(color: Colors.grey),),
         SizedBox(height: 5,),
         Text("   Notification",style: TextStyle(fontSize: 23,fontWeight: FontWeight.w700,color: Colors.black),),
-        SizedBox(height: 5,),
-        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[100],
-        width: 370,
-        height: 75,
-        child: Text("jjj"),)
-      ],);
+        SizedBox(height: 15,),
+        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
+        width: 375,
+        height: 55,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Pump 3 open at 3:45',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+          ),
+        ),),
+        SizedBox(height: 8,),
+        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
+          width: 375,
+          height: 55,
+          child:Align(
+    alignment: Alignment.centerLeft,
+    child: Text(
+    'Moisture level on 3:00 is below threshold', style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+      textAlign: TextAlign.left,
+    ),
+    ),),
+        SizedBox(height: 8,),
+        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
+          width: 375,
+          height: 55,
+          child: Align(
+    alignment: Alignment.centerLeft,
+    child: Text(
+    'Pump 1 close at 5:15',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+    ),
+    ),),
+
+      ],
+    );
   }
 }
