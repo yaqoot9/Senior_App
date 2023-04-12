@@ -40,7 +40,7 @@ class _registerpageState extends State<registerpage> {
         child:Center(
           child: Column(children: [
             Padding(padding: EdgeInsets.all(10)),
-           Text("Create an account",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+           Text("Create an account",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color:Colors.green[900]),),
             Padding(padding: EdgeInsets.all(10)),
             Form(key: _formKey,
               child:Column(
@@ -172,7 +172,7 @@ class _registerpageState extends State<registerpage> {
                       }, child: Text('register')
                   ), ),
 
-                  TextButton(child: Text("Already have an account ? Sign in",style: TextStyle(color: Colors.black),),onPressed: () => Navigator.pushNamed(context,'/LoginPage',))
+                  TextButton(child: Text("Already have an account ? Sign in",style: TextStyle(color:Colors.green[900]),),onPressed: () => Navigator.pushNamed(context,'/LoginPage',))
                 ],
               )
               ,)

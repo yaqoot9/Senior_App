@@ -21,19 +21,17 @@ class notification extends StatefulWidget {
 }
 
 class _notificationState extends State<notification> {
-  List<String> _values = [];
+  List<String> _values = ['Pump 1 open on 2:00','Moisture level on 3:00 is below threshold','Pump 2 open on 3:55','Moisture level on 3:00 is below threshold','Pump 1 open on 2:00'];
   @override
   Widget build(BuildContext context) {
-    if (_values==[]){
-      return Text("No notification!");
-    }
+
    return Center(
 
      child: Column(children: [
        SizedBox(height: 25,),
        Text("Notifiaction",style:TextStyle(fontSize: 24,fontWeight: FontWeight.w700,color: Colors.amber[600])),
      SizedBox(height: 10,),
-     SizedBox(height: 500,
+     SizedBox(height: 300,
    child:ListView.separated(
    separatorBuilder: (context, index) => Divider(
    color: Colors.black,
@@ -96,7 +94,7 @@ class _notificationState extends State<notification> {
    ),
    ),
      ],),
-   );
+   );}
   }
-}
+
 
