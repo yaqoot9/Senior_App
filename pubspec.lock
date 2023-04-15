@@ -65,6 +65,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  day_picker:
+    dependency: "direct main"
+    description:
+      name: day_picker
+      sha256: e2b177625c3866964ae2314cd800b1260df684eb18741be64cb73e1c07b2c7b8
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  dialogs:
+    dependency: "direct main"
+    description:
+      name: dialogs
+      sha256: "93f5fd23cfbe09e57a15bf43a0208b50232a9db3c718f0d8f8e94118e38c14e5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -91,14 +107,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  infinite_listview:
-    dependency: transitive
-    description:
-      name: infinite_listview
-      sha256: f6062c1720eb59be553dfa6b89813d3e8dd2f054538445aaa5edaddfa5195ce6
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   intl:
     dependency: "direct main"
     description:
@@ -147,14 +155,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
-  numberpicker:
-    dependency: "direct main"
-    description:
-      name: numberpicker
-      sha256: "4c129154944b0f6b133e693f8749c3f8bfb67c4d07ef9dcab48b595c22d1f156"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.2"
   path:
     dependency: transitive
     description:
@@ -226,3 +226,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.19.3 <3.0.0"
+  flutter: ">=1.17.0"

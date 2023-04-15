@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:day_picker/day_picker.dart';
+import 'package:dialogs/dialogs.dart';
 
 
 class add extends StatelessWidget {
@@ -8,8 +10,87 @@ class add extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       home:Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(decoration: BoxDecoration(),child: Center(
+                child: Column(children: [
+                  CircleAvatar(
+                    radius: 40, // Image radius
+                    backgroundImage: NetworkImage("https://th.bing.com/th/id/OIP.K7lG3005eY-tEHwlxf61qgHaFx?pid=ImgDet&rs=1"),
+                  ),
+                  Text("Ahmad Awad",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                  Text("Ahmad@gmail.com")
+                ],),
+              ),),
+
+              Builder(builder: (context)=>ListTile(
+                leading: Icon(Icons.person),
+                title: Text("User information"),
+                // onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+              )),
+
+              Builder(builder: (context)=>
+                  ListTile(
+                      leading: Icon(Icons.date_range),
+                      title: Text("My programs"),
+                      onTap:() {Navigator.pushNamed(context,'/myprogram');}
+                  )),
+
+              Builder(builder: (context)=>ListTile(
+                  leading: Icon(Icons.notifications),
+                  title: Text("Notification"),
+                  onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+              )),
+
+
+              Builder(builder: (context)=>ListTile(
+                leading: Icon(Icons.help),
+                title: Text("Help"),
+                // onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+              ) ) ,
+
+              Builder(builder: (context)=>ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text("Logout"),
+                  onTap:() {Navigator.pushNamed(context,'/login');}
+              ) ),
+            ],
+          ),
+        ),
+
+        appBar:AppBar(
+          actions: [
+            Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                    icon: const Icon(Icons.notifications,color:Colors.black87,size: 35,),
+                    tooltip: 'Open notification',
+                    onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
+                    }
+                );
+              },
+            ),
+
+          ],
+          backgroundColor: Colors.lime[100],leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.account_circle,color:Colors.black87,size: 35,),
+              onPressed: () { Scaffold.of(context).openDrawer(); },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
+          leadingWidth: 105,
+          title:
+          Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),
+
+          centerTitle: true,),
         body:AddProgram() ,
       ),
     );
@@ -24,18 +105,45 @@ class AddProgram extends StatefulWidget {
 
 class _AddProgramState extends State<AddProgram> {
  int currentValue = 30;
- List<String> staus=["Low","Medium","High"];
+ List<String> status=["Low","Medium","High"];
+ List<String> daysOfWeek=[];
  String statusValue="Low";
   final _formKey = GlobalKey<FormState>();
   final dateController = TextEditingController();
   final timeController=TextEditingController();
-  @override
 
+ List<DayInWeek> _days = [
+   DayInWeek(
+     "Sun",
+   ),
+   DayInWeek(
+     "Mon",
+   ),
+   DayInWeek(
+       "Tue",
+       isSelected: true
+   ),
+   DayInWeek(
+     "Wed",
+   ),
+   DayInWeek(
+     "Thu",
+   ),
+   DayInWeek(
+     "Fri",
+   ),
+   DayInWeek(
+     "Sat",
+   ),
+ ];
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("set your program",style: TextStyle(fontWeight: FontWeight.bold),textAlign:TextAlign.left,),
+        SizedBox(height: 25,),
+        Text("     set your program:",style: TextStyle(fontWeight: FontWeight.bold,fontSize:23),textAlign:TextAlign.left,),
         SizedBox(height: 50,),
         Form(key: _formKey,
           child:Column(
@@ -73,7 +181,7 @@ class _AddProgramState extends State<AddProgram> {
         },
       ),),
         SizedBox(height: 23,),
-        Text("duration",style: TextStyle(fontWeight: FontWeight.bold),textAlign:TextAlign.left),
+        Text("Duration",style: TextStyle(fontWeight: FontWeight.bold),textAlign:TextAlign.left),
               Slider(
                 min: 0.0,
                 max: 200.0,
@@ -90,14 +198,14 @@ class _AddProgramState extends State<AddProgram> {
               ),
               Text("Duration of watering ${currentValue.toString()} minutes"),
               SizedBox(height: 30,),
-              Text("speed of water pump",style: TextStyle(fontWeight: FontWeight.bold),),
+              Text("Speed of water pump",style: TextStyle(fontWeight: FontWeight.bold),),
               FormField<String>(builder:  (FormFieldState<String> state){return DropdownButton<String>(
                 value:statusValue,
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 dropdownColor:Colors.lightGreen[50],
                 iconSize:35,
                 isExpanded: true,
-                items: staus.map((String value) {
+                items: status.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text("   ${value}",style: TextStyle(fontSize: 19),),
@@ -110,13 +218,45 @@ class _AddProgramState extends State<AddProgram> {
                 },
               );
               }
+              ),
+              SizedBox(height: 30,),
+              Text("Days of week",style: TextStyle(fontWeight: FontWeight.bold),),
+              SizedBox(height: 20,),
 
-              ) ],
+    FormField<List<String>>(builder:  (FormFieldState<List <String>> state) {
+      return SelectWeekDays(
+        fontSize: 15,
+        fontWeight: FontWeight.w600,
+        days: _days,
+        boxDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(33.0),
+         color: Colors.lightGreen[300]
+        ),
+        onSelect: (values) { // <== Callback to handle the selected days
+        daysOfWeek=values;
+        },
+     );
+    }
+    ),
+    SizedBox(height: 30,),
+    Container(
+      color: Colors.lime[200],height: 40,
+      child:TextButton(onPressed:() {
+        MessageDialog(dialogBackgroundColor: Colors.grey[50],
+          buttonOkColor: Colors.lightGreen[300],
+          message: 'Added Done !',
+          title: '✓',
+        ).show(context);
+      }
+          , child: Text('Save program',style: TextStyle(color: Colors.black87),)),
+    )
+  ],
     )
 
     )
     ],
 
     );
+    }
   }
-}
+
