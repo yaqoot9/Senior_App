@@ -1,4 +1,5 @@
 import 'package:firstapp/addProgram.dart';
+import 'package:firstapp/editProgram.dart';
 import 'package:firstapp/notification.dart';
 import 'package:firstapp/programs.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class detailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(  routes: <String, WidgetBuilder>{
       '/addProgram':(BuildContext context) =>add(),
-      '/EditProgram':(BuildContext context)=>programmsPage(),
+      '/EditProgram':(BuildContext context)=>editProgram(),
       '/NotificationPage':(BuildContext context)=>notificationpage(),
     },
       debugShowCheckedModeBanner: false,
@@ -19,7 +20,7 @@ class detailsPage extends StatelessWidget {
           Builder(
             builder: (BuildContext context) {
               return IconButton(
-                  icon: const Icon(Icons.notifications,color:Colors.black,size: 35,),
+                  icon: const Icon(Icons.notifications,color:Color(0xFF7CB342),size: 35,),
                   tooltip: 'Open notification',
                   onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
                   }
@@ -28,14 +29,10 @@ class detailsPage extends StatelessWidget {
           ),
 
         ],
-          backgroundColor: Colors.lime[100],leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back,color:Colors.black,size: 35,),
-              onPressed: () { Navigator.pop;}
-            );
-          },
-        ),
+          backgroundColor: Colors.lime[100],leading: IconButton(
+        icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342),size: 35),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
           leadingWidth: 105,
           title:
           Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),

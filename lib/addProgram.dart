@@ -1,7 +1,12 @@
+import 'package:firstapp/Details.dart';
+import 'package:firstapp/Login.dart';
+import 'package:firstapp/home.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:day_picker/day_picker.dart';
 import 'package:dialogs/dialogs.dart';
+
+import 'programs.dart';
 
 
 class add extends StatelessWidget {
@@ -10,7 +15,12 @@ class add extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
+      routes: <String, WidgetBuilder>{
+        '/HomePage':(BuildContext context) =>Home (),
+        '/DeteilsPage':(BuildContext context)=>detailsPage(),
+        '/login':(BuildContext context)=>LoginPage(),
+        '/myprogram':(BuildContext context)=>programmsPage(),
+      },
       debugShowCheckedModeBanner: false,
       home:Scaffold(
         drawer: Drawer(
@@ -64,28 +74,23 @@ class add extends StatelessWidget {
         ),
 
         appBar:AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342),size: 35),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           actions: [
             Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                    icon: const Icon(Icons.notifications,color:Colors.black87,size: 35,),
-                    tooltip: 'Open notification',
-                    onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
+                    icon: const Icon(Icons.home,color:Color(0xFF7CB342),size: 35,),
+                    onPressed: () {Navigator.pushNamed(context,'/HomePage',);
                     }
                 );
               },
             ),
 
           ],
-          backgroundColor: Colors.lime[100],leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.account_circle,color:Colors.black87,size: 35,),
-              onPressed: () { Scaffold.of(context).openDrawer(); },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
+          backgroundColor: Colors.lime[100],
           leadingWidth: 105,
           title:
           Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),
@@ -158,6 +163,22 @@ class _AddProgramState extends State<AddProgram> {
     onTap: () async {
     var date = await showDatePicker(
     context: context,
+    builder: (context, child) {
+    return Theme(
+    data: Theme.of(context).copyWith(
+    colorScheme: ColorScheme.light(
+    primary: Colors.lightGreen,
+    onPrimary: Colors.black87,
+    onSurface: Colors.blueGrey,
+    ),
+    textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(
+    primary: Colors.black87, // button text color
+    ),
+    ),
+    ),
+    child: child!,
+    );},
     initialDate: DateTime.now(),
     firstDate: DateTime(1900),
     lastDate: DateTime(2100));
@@ -174,7 +195,24 @@ class _AddProgramState extends State<AddProgram> {
         controller: timeController,
           decoration: const InputDecoration(hintText: 'Start Time', enabledBorder: OutlineInputBorder(borderSide: BorderSide(width: 2,color: Colors.lightGreen)), suffixIcon: Icon(Icons.access_time_outlined),),
         onTap: () async {
-          var time = await showTimePicker(context: context, initialTime:TimeOfDay.now() );
+          var time = await showTimePicker(context: context, initialTime:TimeOfDay.now(),
+            builder: (context, child) {
+              return Theme(
+                data: ThemeData.light().copyWith(
+                  colorScheme: ColorScheme.light(
+                    primary: Colors.lightGreen,
+                    onSurface: Colors.blueGrey,
+                  ),
+
+                  buttonTheme: ButtonThemeData(
+                    colorScheme: ColorScheme.light(
+                      primary: Colors.green,
+                    ),
+                  ),
+                ),
+                child: child!,
+              );
+            },);
           if (time != null) {
             timeController.text=time.format(context);
           }

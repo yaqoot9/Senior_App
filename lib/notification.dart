@@ -1,3 +1,4 @@
+import 'package:firstapp/home.dart';
 import 'package:flutter/material.dart';
 class notificationpage extends StatelessWidget {
   const notificationpage({Key? key}) : super(key: key);
@@ -5,8 +6,34 @@ class notificationpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: <String, WidgetBuilder>{
+        '/HomePage':(BuildContext context) =>Home (),
+      },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar:AppBar(
+          actions: [
+            Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                    icon: const Icon(Icons.home,color:Color(0xFF7CB342),size: 35,),
+                    onPressed: () {Navigator.pushNamed(context,'/HomePage',);
+                    }
+                );
+              },
+            ),
+
+          ],
+          backgroundColor: Colors.lime[100],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342),size: 35),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          leadingWidth: 105,
+          title:
+          Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),
+
+          centerTitle: true,),
         body: notification(),
       ),
     );
@@ -28,8 +55,8 @@ class _notificationState extends State<notification> {
    return Center(
 
      child: Column(children: [
-       SizedBox(height: 25,),
-       Text("Notifiaction",style:TextStyle(fontSize: 24,fontWeight: FontWeight.w700,color: Colors.amber[600])),
+       //SizedBox(height: 30,),
+       //Text("Notifiaction",style:TextStyle(fontSize: 24,fontWeight: FontWeight.w700,color: Color(0xFF7CB342))),
      SizedBox(height: 10,),
      SizedBox(height: 300,
    child:ListView.separated(
@@ -85,7 +112,7 @@ class _notificationState extends State<notification> {
    });
    },
    child: ListTile(
-   leading: Icon(Icons.notifications_active_outlined, size: 30,color: Colors.amber[600],),
+   leading: Icon(Icons.notifications_active_outlined, size: 30,color: Color(0xFF7CB342),),
    title: Text(_values[index],style: TextStyle(fontSize:17,fontWeight: FontWeight.w500)),
 
    ),

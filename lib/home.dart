@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget>screens=[
     homepage(),
-    notificationpage (),
+    //notificationpage (),
     programmsPage(),
 
   ];
@@ -50,7 +50,7 @@ return  Scaffold(
     height: 60.0,
     items: <Widget>[
     Icon(Icons.home, size: 30,color: Colors.black,),
-    Icon(Icons.notifications, size: 30,color: Colors.black),
+    //Icon(Icons.notifications, size: 30,color: Colors.black),
     Icon(Icons.date_range, size: 30,color: Colors.black),
     ],
     color: Color(0xFFF0F4C3),
@@ -122,7 +122,7 @@ return  Scaffold(
       Builder(
         builder: (BuildContext context) {
           return IconButton(
-              icon: const Icon(Icons.notifications,color:Colors.black,size: 35,),
+              icon: const Icon(Icons.notifications,color:Color(0xFF7CB342),size: 35,),
               tooltip: 'Open notification',
               onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
               }
@@ -134,7 +134,7 @@ return  Scaffold(
     backgroundColor: Colors.lime[100],leading: Builder(
     builder: (BuildContext context) {
       return IconButton(
-        icon: const Icon(Icons.account_circle,color:Colors.black,size: 35,),
+        icon: const Icon(Icons.account_circle,color:Color(0xFF7CB342),size: 35,),
         onPressed: () { Scaffold.of(context).openDrawer(); },
         tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
       );
