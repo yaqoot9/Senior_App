@@ -15,7 +15,7 @@ class SpecificsCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 45.0,left: 20,right: 20,top:8),
         padding: EdgeInsets.only(left: 11,right: 21,top: 5),
       decoration: BoxDecoration(
-        color: Colors.lime[100],
+        color: Colors.white,
         border: Border.all(
           width: 0.9,
         color: Colors.brown),

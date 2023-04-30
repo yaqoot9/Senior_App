@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firstapp/Login.dart';
 import 'package:flutter/material.dart';
 class register extends StatelessWidget {
@@ -32,6 +33,12 @@ class _registerpageState extends State<registerpage> {
   late String email;
   late String password;
   bool isSecure=true;
+  late DatabaseReference dbref;
+  @override
+  void initState() {
+    super.initState();
+    dbref = FirebaseDatabase.instance.ref().child('Users');
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -166,9 +173,13 @@ class _registerpageState extends State<registerpage> {
                   ConstrainedBox(constraints:  BoxConstraints.tightFor(width: 290),child:   ElevatedButton(
                       style:ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.green[900]!)),
                       onPressed:(){
-                        if(_formKey.currentState!.validate()){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(password)));
-                        }
+                        Map<String,String>?users={
+                          'name':_nameController.text,
+                          'email':_emailController.text,
+                          'password':_passwordController.text
+                        };
+                        dbref.push().set(users);
+
                       }, child: Text('register')
                   ), ),
 

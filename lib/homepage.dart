@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firstapp/Widegts/widegts.dart';
+import 'package:firebase_database/firebase_database.dart';
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
 
@@ -9,11 +10,20 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
+  Query dbRef = FirebaseDatabase.instance.ref().child('Soil_moisture');
+  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Soil_moisture');
   @override
+  Color pumpColor1=Colors.green;
+  Color pumpColor2=Colors.green;
+  Color pumpColor3=Colors.green;
+  final ref = FirebaseDatabase.instance.ref();
+
   Widget build(BuildContext context) {
+    soil(2);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
         SizedBox(
           height: 8,
         ),
@@ -32,7 +42,7 @@ class _homepageState extends State<homepage> {
         CarouselSlider(
           items: [
             //first item
-            SpecificsCard( pump_color: Colors.red,pump_name: 'First Pump',img:'https://th.bing.com/th/id/R.166c0ac31bf882dd621aeb1b996a677b?rik=5Ozv3loNIkqqAw&pid=ImgRaw&r=0' ,),
+            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://th.bing.com/th/id/R.166c0ac31bf882dd621aeb1b996a677b?rik=5Ozv3loNIkqqAw&pid=ImgRaw&r=0' ,),
             //second item
             SpecificsCard( pump_color: Colors.green,pump_name: 'Second Pump',img:'https://th.bing.com/th/id/R.7af6ae3e44c15c54cdb64c87c54618cf?rik=nLdhmLD5MmoC7Q&pid=ImgRaw&r=0'),
             //third item
@@ -90,5 +100,15 @@ class _homepageState extends State<homepage> {
 
       ],
     );
+  }
+  Future<void> soil(int id) async {
+    final snapshot = await ref.child('Soil_moisture/${id}').get();
+    if (snapshot.exists) {
+      final data=snapshot.value as Map;
+      final x=data['value'];
+      print(x);
+    } else {
+      print('No data available.');
+    }
   }
 }

@@ -14,32 +14,32 @@ class detailsPage extends StatelessWidget {
       '/NotificationPage':(BuildContext context)=>notificationpage(),
     },
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-      appBar:  AppBar(
-        actions: [
-          Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                  icon: const Icon(Icons.notifications,color:Color(0xFF7CB342),size: 35,),
-                  tooltip: 'Open notification',
-                  onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
-                  }
-              );
-            },
-          ),
+      home: SafeArea(child:Scaffold(
+        appBar:  AppBar(
+          actions: [
+            Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                    icon: const Icon(Icons.notifications,color:Color(0xFF7CB342),size: 35,),
+                    tooltip: 'Open notification',
+                    onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
+                    }
+                );
+              },
+            ),
 
-        ],
+          ],
           backgroundColor: Colors.lime[100],leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342),size: 35),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+          icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342),size: 35),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
           leadingWidth: 105,
           title:
           Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),
           centerTitle: true,),
 
         body: details(),
-      ),
+      ),)
     );
   }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "567343009812",
+    "firebase_url": "https://fresh-plant-default-rtdb.firebaseio.com",
+    "project_id": "fresh-plant",
+    "storage_bucket": "fresh-plant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567343009812:android:f35dbc0ee7f3082095d701",
+        "android_client_info": {
+          "package_name": "com.example.firstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567343009812-edfm6f4ttcka3pj6fch42j1209nhbhle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVaLkJh4k4CB9Ou_5oCgZlvBlP9OruR-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567343009812-edfm6f4ttcka3pj6fch42j1209nhbhle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

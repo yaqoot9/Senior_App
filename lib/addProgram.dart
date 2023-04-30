@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:day_picker/day_picker.dart';
 import 'package:dialogs/dialogs.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'programs.dart';
 
@@ -22,7 +23,7 @@ class add extends StatelessWidget {
         '/myprogram':(BuildContext context)=>programmsPage(),
       },
       debugShowCheckedModeBanner: false,
-      home:Scaffold(
+      home:SafeArea(child:Scaffold(
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -97,7 +98,7 @@ class add extends StatelessWidget {
 
           centerTitle: true,),
         body:AddProgram() ,
-      ),
+      ),)
     );
   }
 }
@@ -116,6 +117,7 @@ class _AddProgramState extends State<AddProgram> {
   final _formKey = GlobalKey<FormState>();
   final dateController = TextEditingController();
   final timeController=TextEditingController();
+ DatabaseReference dbref = FirebaseDatabase.instance.ref().child("Schdule/12");
 
  List<DayInWeek> _days = [
    DayInWeek(
@@ -148,8 +150,8 @@ class _AddProgramState extends State<AddProgram> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 25,),
-        Text("     set your program:",style: TextStyle(fontWeight: FontWeight.bold,fontSize:23),textAlign:TextAlign.left,),
-        SizedBox(height: 50,),
+        //Text("     set your program:",style: TextStyle(fontWeight: FontWeight.bold,fontSize:23),textAlign:TextAlign.left,),
+        //SizedBox(height: 50,),
         Form(key: _formKey,
           child:Column(
 
@@ -279,7 +281,16 @@ class _AddProgramState extends State<AddProgram> {
     SizedBox(height: 30,),
     Container(
       color: Colors.lime[200],height: 40,
-      child:TextButton(onPressed:() {
+      child:TextButton(onPressed:() async {
+
+        await dbref.set({
+          'date':dateController.text,
+          'time':timeController.text,
+          'duration':currentValue.toString(),
+          'days':daysOfWeek.toString(),
+          'speed':statusValue.toString()
+
+        });
         MessageDialog(dialogBackgroundColor: Colors.grey[50],
           buttonOkColor: Colors.lightGreen[300],
           message: 'Added Done !',
