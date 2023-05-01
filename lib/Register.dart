@@ -29,7 +29,9 @@ class _registerpageState extends State<registerpage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _cpasswordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   late String email;
   late String password;
   bool isSecure=true;
@@ -41,13 +43,22 @@ class _registerpageState extends State<registerpage> {
   }
   @override
   Widget build(BuildContext context) {
-
     return Container(
-        color: Colors.lime[100],
+        color: Colors.brown[50],
         child:Center(
-          child: Column(children: [
-            Padding(padding: EdgeInsets.all(10)),
-           Text("Create an account",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color:Colors.green[900]),),
+
+          child: Stack(children: [
+          Container(
+          margin: EdgeInsets.only(top:119),
+          child: Image.asset('assets/plantCover.jpg',  opacity: AlwaysStoppedAnimation(0.9),fit: BoxFit.cover),
+        ),
+
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center
+            ,
+            children: [
+           Text("Create an account",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,color:Colors.green[900],fontFamily: 'Dancing'),),
             Padding(padding: EdgeInsets.all(10)),
             Form(key: _formKey,
               child:Column(
@@ -95,7 +106,26 @@ class _registerpageState extends State<registerpage> {
                       },
 
                     ),),
+                  Padding(padding: EdgeInsets.all(5)),
+                  ConstrainedBox(constraints: BoxConstraints.tightFor(width: 300) ,
+                    child:  TextFormField(
+                      controller: _phoneController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        labelText: 'phone_Number',
+                        suffixIcon: Icon(Icons.phone_android),
 
+                      ),
+                      validator: (val) {
+                        if (val==null || val.isEmpty) {
+                          return "please enter your phone";
+                        }
+                        return null;
+                      },
+
+                    ),),
                   Padding(padding: EdgeInsets.all(5)),
                   ConstrainedBox(constraints: BoxConstraints.tightFor(width: 300)
                     ,child:TextFormField(
@@ -133,10 +163,11 @@ class _registerpageState extends State<registerpage> {
 
                     ) ,),
 
+
                   Padding(padding: EdgeInsets.all(5)),
                   ConstrainedBox(constraints: BoxConstraints.tightFor(width: 300)
                     ,child:TextFormField(
-                        controller: _passwordController,
+                        controller: _cpasswordController,
                         obscureText: isSecure,
                         decoration: InputDecoration(
                           filled: true,
@@ -157,11 +188,9 @@ class _registerpageState extends State<registerpage> {
 
                         ),
                         validator: (String? val) {
-                          if(val==null||val.isEmpty)
-                            return "Please enter password";
-                          else if (val.length<8){
-                            return "Password should be more than 8";
-                          }
+                          if(val!=_passwordController.text)
+                            return "Please enter correct password";
+
                           else
                             return null;
                         }
@@ -170,15 +199,21 @@ class _registerpageState extends State<registerpage> {
 
                     ) ,),
                   Padding(padding: EdgeInsets.all(5)),
-                  ConstrainedBox(constraints:  BoxConstraints.tightFor(width: 290),child:   ElevatedButton(
+                  ConstrainedBox(constraints:  BoxConstraints.tightFor(width: 200),child:   ElevatedButton(
                       style:ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.green[900]!)),
                       onPressed:(){
-                        Map<String,String>?users={
-                          'name':_nameController.text,
-                          'email':_emailController.text,
-                          'password':_passwordController.text
-                        };
-                        dbref.push().set(users);
+                        if(_formKey.currentState!.validate()){
+                          Map<String,String>?users={
+                            'name':_nameController.text,
+                            'email':_emailController.text,
+                            'password':_passwordController.text,
+                             'phone':_phoneController.text,
+                          };
+                          dbref.push().set(users);
+                          Navigator.pushNamed(context,'/LoginPage',);
+                        }
+
+
 
                       }, child: Text('register')
                   ), ),
@@ -190,6 +225,6 @@ class _registerpageState extends State<registerpage> {
 
           ],
           ),
-        ));
+        )])));
   }
 }
