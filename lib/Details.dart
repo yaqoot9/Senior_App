@@ -22,7 +22,7 @@ class detailsPage extends StatelessWidget {
             Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                    icon: const Icon(Icons.notifications,color:Color(0xFF7CB342),size: 35,),
+                    icon: const Icon(Icons.notifications,color:Colors.green,size: 35,),
                     tooltip: 'Open notification',
                     onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
                     }
@@ -31,13 +31,13 @@ class detailsPage extends StatelessWidget {
             ),
 
           ],
-          backgroundColor: Colors.lime[100],leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342),size: 35),
+          backgroundColor: Colors.lime[50],leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.green,size: 35),
           onPressed: () => Navigator.of(context).pop(),
         ),
           leadingWidth: 105,
           title:
-          Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18),),
+          Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize:27,fontFamily: 'Dancing',fontWeight: FontWeight.w500),),
           centerTitle: true,),
 
         body: details(),
@@ -54,92 +54,104 @@ class details extends StatefulWidget {
 
 class _detailsState extends State<details> {
    double tempValue=0.0;
+   double HumidityValue=0.0;
+   double moistureValue=0.0;
 
   @override
   Widget build(BuildContext context) {
     fetchLastData(2132322);
-    print("yaqoota${tempValue}");
-   return Stack(
+    print("Temp:${tempValue}");
+   return Container(color:Colors.blueGrey[50],child:Stack(
 
-       children: [
-         Container(child:Image.asset('assets/Cover.jpg',  opacity: AlwaysStoppedAnimation(0.75),fit: BoxFit.cover)),
-         Center(
+     children: [
+       Container(child:Image.asset('assets/Cover.jpg',  opacity: AlwaysStoppedAnimation(0.65),fit: BoxFit.cover)),
+       Center(
 
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.start,
-             children: [
-               SizedBox(height: 30,),
-               Card(
-                   elevation: 20,child:
-               Column(children: [
-                 SizedBox(height: 20),
-                 Text("    Soil Moisture Sensor   ",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 16),),
-                 SizedBox(height: 20,),
-                 CircularPercentIndicator(
-                   radius: 60.0,
-                   lineWidth: 10.0,
-                   percent: 0.6,
-                   center: new Text("60%"),
-                   progressColor: Colors.green,
-                 ),
-                 SizedBox(height: 20),
-               ],
-               )
+         child: Column(
+           mainAxisAlignment: MainAxisAlignment.start,
+           children: [
+             SizedBox(height: 30,),
+             Card(
+                 color: Colors.lime[50],
+                 elevation: 100,child:
+             Column(children: [
+               SizedBox(height: 20),
+               Text("    Soil Moisture Sensor   ",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 16),),
+               SizedBox(height: 20,),
+               CircularPercentIndicator(
+                 radius: 60.0,
+                 lineWidth: 10.0,
+                 percent: (moistureValue/10.23)/100,
+                 center: new Text("${moistureValue/10.23}%",style: TextStyle(fontSize: 23),),
+                 progressColor: Colors.green,
                ),
-
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                 children: [
-                   Card(
-                       elevation: 20,child:
-                   Column(children: [
-                     SizedBox(height: 20),
-                     Text("    Humidity Sensor   ",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 16),),
-                     SizedBox(height: 20,),
-                     CircularPercentIndicator(
-                       radius: 60.0,
-                       lineWidth: 10.0,
-                       percent: 0.7,
-                       center: new Text("70%"),
-                       progressColor: Colors.blue,
-                     ),
-                     SizedBox(height: 20),
-                   ],
-                   )
+               SizedBox(height: 10),
+               Text("Soil Moisture Value : ${moistureValue}",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 14),),
+               SizedBox(height: 17),
+             ],
+             )
+             ),
+             SizedBox(height: 7),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+               children: [
+                 Card(
+                     color: Colors.lime[50],
+                     elevation: 20,child:
+                 Column(children: [
+                   SizedBox(height: 20),
+                   Text("    Humidity Sensor   ",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 16),),
+                   SizedBox(height: 20,),
+                   CircularPercentIndicator(
+                     radius: 60.0,
+                     lineWidth: 10.0,
+                     percent: HumidityValue/100,
+                     center: new Text("${HumidityValue}%",style: TextStyle(fontSize: 23),),
+                     progressColor: Colors.blue,
                    ),
-                   Card(
-                       elevation: 20,child:
-                   Column(children: [
-                     SizedBox(height: 20),
-                     Text("    Tempretuer Sensor   ",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 16),),
-                     SizedBox(height: 20,),
-                     CircularPercentIndicator(
-                       radius: 60.0,
-                       lineWidth: 10.0,
-                       percent: tempValue/100,
-                       center: new Text("40%"),
-                       progressColor: Colors.red,
-                     ),
-                     SizedBox(height: 20),
-                   ],
-                   )
-                   ),
+                   SizedBox(height: 10),
+                   Text("Humidity Value : ${HumidityValue}",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 14),),
+                   SizedBox(height: 17)
                  ],
-               ),
-
-
-               SizedBox(height: 55,),
-
-               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-                 Container(color: Colors.lime[200],height: 40,child: TextButton(onPressed: () =>Navigator.pushNamed(context,'/addProgram',), child: Text('Add pump program',style: TextStyle(color: Colors.black87))),),
-                 Container(
-                   color: Colors.lime[200],height: 40,
-                   child:TextButton(onPressed:()=>Navigator.pushNamed(context,'/EditProgram',), child: Text('Edit pump program ',style: TextStyle(color: Colors.black87),)),
                  )
-               ],)
-             ],),
-         )
-       ],);
+                 ),
+                 Card(
+                     color: Colors.lime[50],
+                     elevation: 20,child:
+                 Column(children: [
+                   SizedBox(height: 20),
+                   Text("    Tempretuer Sensor   ",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 16),),
+                   SizedBox(height: 20,),
+                   CircularPercentIndicator(
+                     radius: 60.0,
+                     lineWidth: 10.0,
+                     percent: (tempValue/0.5)/100,
+                     center: new Text("${tempValue/0.5}%",style: TextStyle(fontSize: 23),),
+                     progressColor: Colors.red,
+                   ),
+                   SizedBox(height: 10),
+                   Text("Tempretuer Value :${tempValue}",style: TextStyle(fontWeight: FontWeight.bold ,fontSize: 14),),
+                   SizedBox(height: 17)
+                 ],
+                 )
+                 ),
+               ],
+             ),
+
+
+             SizedBox(height: 115,),
+
+             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+               Container(color: Colors.green[200],height: 40,child: TextButton(onPressed: () =>Navigator.pushNamed(context,'/addProgram',), child: Text('Add pump program',style: TextStyle(color: Colors.black87))),),
+               Container(
+                 color: Colors.green[200],height: 40,
+                 child:TextButton(onPressed:()=>Navigator.pushNamed(context,'/EditProgram',), child: Text('Edit pump program ',style: TextStyle(color:Colors.black87),)),
+               )
+             ],)
+           ],),
+       )
+     ],) ,);
+
 
   }
 
@@ -147,12 +159,15 @@ class _detailsState extends State<details> {
 
   Future<dynamic> fetchLastData(int chanelId) async {
     final response = await http.get(Uri.parse(
-        'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=8HWE9I4YWWDAP904&results=1'));
+        'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=8HWE9I4YWWDAP904&results=1'
+
+    ));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       print(data['field2']);
     tempValue=double.parse(data['field2']) ;
+    HumidityValue=22;
 
       return data['field2'];
     } else {

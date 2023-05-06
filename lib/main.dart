@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
       home:Scaffold(
         body: Container(
-          color: Colors.lime[100],
+          color: Colors.amber[50],
           child:Center(
 
             child: Column(
