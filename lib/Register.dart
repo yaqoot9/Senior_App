@@ -35,22 +35,21 @@ class _registerpageState extends State<registerpage> {
   late String email;
   late String password;
   bool isSecure=true;
-  late DatabaseReference dbref;
-  @override
-  void initState() {
-    super.initState();
-    dbref = FirebaseDatabase.instance.ref().child('Users');
-  }
+  static var Id=1;
+  DatabaseReference dbref = FirebaseDatabase.instance.ref().child("Users/${Id}");
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.brown[50],
+        color: Colors.grey[350],
         child:Center(
 
           child: Stack(children: [
           Container(
-          margin: EdgeInsets.only(top:119),
-          child: Image.asset('assets/plantCover.jpg',  opacity: AlwaysStoppedAnimation(0.9),fit: BoxFit.cover),
+          //margin: EdgeInsets.only(top:100),
+          child: Image.asset('assets/Cover.jpg',  opacity: AlwaysStoppedAnimation(0.9),fit: BoxFit.cover),
         ),
 
         Center(
@@ -59,7 +58,7 @@ class _registerpageState extends State<registerpage> {
             ,
             children: [
            Text("Create an account",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,color:Colors.green[900],fontFamily: 'Dancing'),),
-            Padding(padding: EdgeInsets.all(10)),
+            Padding(padding: EdgeInsets.all(3)),
             Form(key: _formKey,
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -201,15 +200,16 @@ class _registerpageState extends State<registerpage> {
                   Padding(padding: EdgeInsets.all(5)),
                   ConstrainedBox(constraints:  BoxConstraints.tightFor(width: 200),child:   ElevatedButton(
                       style:ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.green[900]!)),
-                      onPressed:(){
+                      onPressed:()async{
                         if(_formKey.currentState!.validate()){
-                          Map<String,String>?users={
+                          await dbref.set({
                             'name':_nameController.text,
                             'email':_emailController.text,
                             'password':_passwordController.text,
-                             'phone':_phoneController.text,
-                          };
-                          dbref.push().set(users);
+                            'phone':_phoneController.text,
+
+                          });
+                          Id=Id+1;
                           Navigator.pushNamed(context,'/LoginPage',);
                         }
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firstapp/Widegts/widegts.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
 
@@ -10,43 +12,35 @@ class homepage extends StatefulWidget {
 }
 
 class _homepageState extends State<homepage> {
-  Query dbRef = FirebaseDatabase.instance.ref().child('Soil_moisture');
-  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Soil_moisture');
   @override
-  Color pumpColor1=Colors.green;
+  Color pumpColor1=Colors.black87;
   Color pumpColor2=Colors.green;
   Color pumpColor3=Colors.green;
-  final ref = FirebaseDatabase.instance.ref();
+
 
   Widget build(BuildContext context) {
-    soil(2);
-    return Column(
+    fetchLastData(2132322);
+    return Container(
+      color:Colors.green[50],
+      child:Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
         SizedBox(
-          height: 8,
+          height: 18,
         ),
 
-        TextField(
-          //onChanged: (value) => _runFilter(value),
-          decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Search', suffixIcon: Icon(Icons.search)),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Text("  My pumps",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 23,color: Colors.black),textAlign: TextAlign.left,),
+
+        Text("  My pumps",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 23,color: Colors.black,fontFamily: 'Courgette'),textAlign: TextAlign.left,),
         SizedBox(height: 5,),
         CarouselSlider(
           items: [
             //first item
-            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://th.bing.com/th/id/R.166c0ac31bf882dd621aeb1b996a677b?rik=5Ozv3loNIkqqAw&pid=ImgRaw&r=0' ,),
+            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU' ,),
             //second item
-            SpecificsCard( pump_color: Colors.green,pump_name: 'Second Pump',img:'https://th.bing.com/th/id/R.7af6ae3e44c15c54cdb64c87c54618cf?rik=nLdhmLD5MmoC7Q&pid=ImgRaw&r=0'),
+            SpecificsCard( pump_color: Colors.green,pump_name: 'Second Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU'),
             //third item
-            SpecificsCard( pump_color: Colors.red,pump_name: 'Third Pump',img:'https://th.bing.com/th/id/R.35b6035b41dbeeaa2181d1729b3451a6?rik=7MV8WP9x5qE3oA&pid=ImgRaw&r=0')
+            SpecificsCard( pump_color: Colors.red,pump_name: 'Third Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU')
 
           ],
 
@@ -68,47 +62,57 @@ class _homepageState extends State<homepage> {
         Text("   Notification",style: TextStyle(fontSize: 23,fontWeight: FontWeight.w700,color: Colors.black),),
         SizedBox(height: 15,),
         Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
-        width: 375,
-        height: 55,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Pump 3 open at 3:45',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
-          ),
-        ),),
+          width: 375,
+          height: 55,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Pump 3 open at 3:45',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+            ),
+          ),),
         SizedBox(height: 8,),
         Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
           width: 375,
           height: 55,
           child:Align(
-    alignment: Alignment.centerLeft,
-    child: Text(
-    'Moisture level on 3:00 is below threshold', style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
-      textAlign: TextAlign.left,
-    ),
-    ),),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Moisture level on 3:00 is below threshold', style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+              textAlign: TextAlign.left,
+            ),
+          ),),
         SizedBox(height: 8,),
         Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
           width: 375,
           height: 55,
           child: Align(
-    alignment: Alignment.centerLeft,
-    child: Text(
-    'Pump 1 close at 5:15',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
-    ),
-    ),),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Pump 1 close at 5:15',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+            ),
+          ),),
 
       ],
-    );
+    ),);
+
   }
-  Future<void> soil(int id) async {
-    final snapshot = await ref.child('Soil_moisture/${id}').get();
-    if (snapshot.exists) {
-      final data=snapshot.value as Map;
-      final x=data['value'];
-      print(x);
+
+
+
+  Future<dynamic> fetchLastData(int chanelId) async {
+    final response = await http.get(Uri.parse(
+        'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=8HWE9I4YWWDAP904&results=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print(data['field2']);
+if(data['field2'].compareTo("10")>0)
+        pumpColor1=Colors.black87;
+
+      return data['field2'];
     } else {
-      print('No data available.');
+      throw Exception('Failed to load data');
     }
   }
+
 }

@@ -117,7 +117,8 @@ class _AddProgramState extends State<AddProgram> {
   final _formKey = GlobalKey<FormState>();
   final dateController = TextEditingController();
   final timeController=TextEditingController();
- DatabaseReference dbref = FirebaseDatabase.instance.ref().child("Schdule/12");
+  static var Id=1;
+ DatabaseReference dbref = FirebaseDatabase.instance.ref().child("Schdule/${Id}");
 
  List<DayInWeek> _days = [
    DayInWeek(
@@ -143,6 +144,8 @@ class _AddProgramState extends State<AddProgram> {
      "Sat",
    ),
  ];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -291,6 +294,7 @@ class _AddProgramState extends State<AddProgram> {
           'speed':statusValue.toString()
 
         });
+        Id=Id+1;
         MessageDialog(dialogBackgroundColor: Colors.grey[50],
           buttonOkColor: Colors.lightGreen[300],
           message: 'Added Done !',

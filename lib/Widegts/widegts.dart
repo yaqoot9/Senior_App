@@ -25,24 +25,24 @@ class SpecificsCard extends StatelessWidget {
     child:
     Column(children: [
       Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,children: [
-        Text(pump_name,style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold,color: Colors.brown),),
+        Text(pump_name,style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold,color: Colors.black87,fontFamily: 'Dancing'),),
         Container(
-          width: 18,
-          height: 18,
+          width: 25,
+          height: 25,
           decoration: BoxDecoration(color: pump_color,borderRadius: BorderRadius.circular(50)),
         )
       ],),
       SizedBox(height: 40,)
     ],)
     ),
-    Positioned(child:Icon(Icons.lock_outline),top: 128,left: 20, ),
+    Positioned(child:Icon(Icons.lock_outline,size: 35,),top:103,left: 25, ),
 
     Positioned(
-    top:45,left: 193,
+    top:65,left: 210,
       child:
     GestureDetector(onDoubleTap: (){Navigator.pushNamed(context,'/DeteilsPage');},
       child: CircleAvatar(
-      radius: 60, // Image radius
+      radius: 58, // Image radius
       backgroundImage: NetworkImage(img),
     )
     ) )
