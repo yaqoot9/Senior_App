@@ -1,3 +1,4 @@
+import 'package:firstapp/Widegts/widegts.dart';
 import 'package:firstapp/addProgram.dart';
 import 'package:firstapp/editProgram.dart';
 import 'package:firstapp/notification.dart';
@@ -6,7 +7,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 class detailsPage extends StatelessWidget {
-  const detailsPage({Key? key}) : super(key: key);
+late int chanellIdDHt1;
+late int chanellIdMoisture1;
+late String ReadApiDHt;
+late String ReadApiMoisture;
+ detailsPage({required this.chanellIdDHt1,required this.chanellIdMoisture1,required this.ReadApiMoisture,required this.ReadApiDHt});
 
   @override
   Widget build(BuildContext context) {
@@ -40,27 +45,41 @@ class detailsPage extends StatelessWidget {
           Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize:27,fontFamily: 'Dancing',fontWeight: FontWeight.w500),),
           centerTitle: true,),
 
-        body: details(),
+        body: details(chanellIdDHt1: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1,ReadApiDHt:ReadApiDHt,ReadApiMoisture:ReadApiMoisture),
       ),)
     );
   }
 }
 class details extends StatefulWidget {
-
+   late int chanellIdDHt1;
+   late int chanellIdMoisture1;
+   late String ReadApiDHt;
+   late String ReadApiMoisture;
+  details ({required this.chanellIdDHt1,required this.chanellIdMoisture1,required this.ReadApiMoisture,required this.ReadApiDHt});
   @override
-  State<details> createState() => _detailsState();
+  State<details> createState() => _detailsState(ChanellId: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1, ReadApiDHt: ReadApiDHt,ReadApiMoisture:ReadApiMoisture);
 
 }
 
 class _detailsState extends State<details> {
+  late int ChanellId;
+  late int chanellIdMoisture1;
+  late String ReadApiDHt;
+  late String ReadApiMoisture;
+  _detailsState({required this.ChanellId,required this.chanellIdMoisture1,required this.ReadApiMoisture,required this.ReadApiDHt});
    double tempValue=0.0;
    double HumidityValue=0.0;
    double moistureValue=0.0;
+   //int ChanellId=data.ChanellIdDHt11;
 
   @override
   Widget build(BuildContext context) {
-    fetchLastData(2132322);
+    FeacthLastDataTempruter(ChanellId,ReadApiDHt);
+    FeacthLastDataHumidity(ChanellId,ReadApiDHt);
+    FeacthLastDataMoisture(chanellIdMoisture1,ReadApiMoisture);
     print("Temp:${tempValue}");
+    print("Humidity:${HumidityValue}");
+    print("Moisture:${moistureValue}");
    return Container(color:Colors.blueGrey[50],child:Stack(
 
      children: [
@@ -157,9 +176,9 @@ class _detailsState extends State<details> {
 
 
 
-  Future<dynamic> fetchLastData(int chanelId) async {
+  Future<dynamic> FeacthLastDataTempruter(int chanelId,String API) async {
     final response = await http.get(Uri.parse(
-        'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=8HWE9I4YWWDAP904&results=1'
+        'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${API}&results=1'
 
     ));
 
@@ -167,8 +186,40 @@ class _detailsState extends State<details> {
       final data = json.decode(response.body);
       print(data['field2']);
     tempValue=double.parse(data['field2']) ;
-    HumidityValue=22;
+      return data['field2'];
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 
+
+  Future<dynamic> FeacthLastDataHumidity(int chanelId,String API) async {
+    final response = await http.get(Uri.parse(
+        'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${API}&results=1'
+
+    ));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print(data['field1']);
+      HumidityValue=double.parse(data['field1']) ;
+      return data['field1'];
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+
+  Future<dynamic> FeacthLastDataMoisture(int chanelId,String API) async {
+    final response = await http.get(Uri.parse(
+        'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${API}&results=1'
+
+    ));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print(data['field1']);
+      moistureValue=double.parse(data['field1']) ;
       return data['field2'];
     } else {
       throw Exception('Failed to load data');

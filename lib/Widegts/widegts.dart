@@ -1,11 +1,15 @@
+import 'package:firstapp/Details.dart';
 import 'package:flutter/material.dart';
 
 class SpecificsCard extends StatelessWidget {
   Color pump_color;
   final String pump_name;
   final String img;
-
-  SpecificsCard({required this.pump_color, required this.pump_name, required this.img});
+final int chanellIdDHt1;
+final int chanellIdMoisture1;
+final String ReadApiDHt;
+final String ReadApiMoisture;
+  SpecificsCard({required this.pump_color, required this.pump_name, required this.img,required this.chanellIdDHt1,required this.chanellIdMoisture1,required this.ReadApiDHt,required this.ReadApiMoisture});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +44,17 @@ class SpecificsCard extends StatelessWidget {
     Positioned(
     top:65,left: 210,
       child:
-    GestureDetector(onDoubleTap: (){Navigator.pushNamed(context,'/DeteilsPage');},
+    GestureDetector(onDoubleTap: (){Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>detailsPage(chanellIdDHt1: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1,ReadApiMoisture:ReadApiMoisture,ReadApiDHt:ReadApiDHt)),
+
+    );},
       child: CircleAvatar(
       radius: 58, // Image radius
       backgroundImage: NetworkImage(img),
     )
     ) )
-
 
 
     ],

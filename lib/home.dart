@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/NotificationPage':(BuildContext context) =>notificationpage (),
-        '/DeteilsPage':(BuildContext context)=>detailsPage(),
+       // '/DeteilsPage':(BuildContext context)=>detailsPage(ChanellId: ChanellId),
         '/login':(BuildContext context)=>LoginPage(),
         '/myprogram':(BuildContext context)=>programmsPage(),
       },
