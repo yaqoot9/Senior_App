@@ -9,7 +9,8 @@ final int chanellIdDHt1;
 final int chanellIdMoisture1;
 final String ReadApiDHt;
 final String ReadApiMoisture;
-  SpecificsCard({required this.pump_color, required this.pump_name, required this.img,required this.chanellIdDHt1,required this.chanellIdMoisture1,required this.ReadApiDHt,required this.ReadApiMoisture});
+final int id;
+  SpecificsCard({required this.pump_color, required this.pump_name, required this.img,required this.chanellIdDHt1,required this.chanellIdMoisture1,required this.ReadApiDHt,required this.ReadApiMoisture,required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ final String ReadApiMoisture;
     GestureDetector(onDoubleTap: (){Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>detailsPage(chanellIdDHt1: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1,ReadApiMoisture:ReadApiMoisture,ReadApiDHt:ReadApiDHt)),
+        builder: (context) =>detailsPage(chanellIdDHt1: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1,ReadApiMoisture:ReadApiMoisture,ReadApiDHt:ReadApiDHt,id: id,)),
 
     );},
       child: CircleAvatar(

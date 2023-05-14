@@ -13,13 +13,15 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   @override
-  Color pumpColor1=Colors.black87;
-  Color pumpColor2=Colors.green;
-  Color pumpColor3=Colors.green;
+  late Color pumpColor1=Colors.white;
+  late Color pumpColor2=Colors.white;
+  late Color pumpColor3=Colors.white;
 
 
   Widget build(BuildContext context) {
-    fetchLastData(2132322);
+    fetchLastDataColor1(2135841,'7SYVVV6AFB6OP1KG');
+    fetchLastDataColor2(2135843,'UC6JISI0UASBNZ9T');
+   // fetchLastDataColor3( 2135844,'LIFRJCH2UKWR1PYD');
     return Container(
       color:Colors.green[50],
       child:Column(
@@ -36,11 +38,11 @@ class _homepageState extends State<homepage> {
         CarouselSlider(
           items: [
             //first item
-            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU' ,chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG'),
+            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU' ,chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1),
             //second item
-            SpecificsCard( pump_color: Colors.green,pump_name: 'Second Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T'),
+           SpecificsCard( pump_color:pumpColor2,pump_name: 'Second Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2),
             //third item
-            SpecificsCard( pump_color: Colors.red,pump_name: 'Third Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD')
+            SpecificsCard( pump_color:pumpColor3,pump_name: 'Third Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)
 
           ],
 
@@ -99,20 +101,62 @@ class _homepageState extends State<homepage> {
 
 
 
-  Future<dynamic> fetchLastData(int chanelId) async {
+  Future<dynamic> fetchLastDataColor1(int chanelId,String readAPI) async {
     final response = await http.get(Uri.parse(
-        'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=8HWE9I4YWWDAP904&results=1'));
+        'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${readAPI}&results=1'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(data['field2']);
-if(data['field2'].compareTo("10")>0)
-        pumpColor1=Colors.black87;
-
-      return data['field2'];
+      print("${data['field1']}");
+if(data['field1'].compareTo("500")>0)
+  pumpColor1=Colors.green;
+else
+  pumpColor1=Colors.red;
+print("pump color is:${pumpColor1}");
+      return data['field1'];
     } else {
       throw Exception('Failed to load data');
     }
   }
+
+
+
+  Future<dynamic> fetchLastDataColor2(int chanelId,String readAPI) async {
+    final response = await http.get(Uri.parse(
+        'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${readAPI}&results=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print("${data['field1']}");
+      if(data['field1'].compareTo("500")>0)
+        pumpColor2=Colors.green;
+      else
+        pumpColor2=Colors.red;
+      print("pump color is:${pumpColor2}");
+      return data['field1'];
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+
+  Future<dynamic> fetchLastDataColor3(int chanelId,String readAPI) async {
+    final response = await http.get(Uri.parse(
+        'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${readAPI}&results=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print("${data['field1']}");
+      if(data['field1'].compareTo("500")>0)
+        pumpColor3=Colors.green;
+      else
+        pumpColor3=Colors.red;
+      print("pump color is:${pumpColor3}");
+      return data['field1'];
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
 
 }

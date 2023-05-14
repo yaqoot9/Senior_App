@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
         index: index,
         height: 60.0,
         items: <Widget>[
-          Icon(Icons.home, size: 30,color: Colors.black,),
+          Icon(Icons.home, size: 30,color: Colors.green,),
           //Icon(Icons.notifications, size: 30,color: Colors.black),
-          Icon(Icons.date_range, size: 30,color: Colors.black),
+          Icon(Icons.date_range, size: 30,color: Colors.green),
         ],
-        color: Color(0xFFF0F4C3),
+        color: Color(0XFFF9FE7),
         buttonBackgroundColor: Colors.white,
         backgroundColor: Colors.white,
         animationCurve: Curves.easeInOut,
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
           Builder(
             builder: (BuildContext context) {
               return IconButton(
-                  icon: const Icon(Icons.notifications,color:Color(0xFF7CB342),size: 35,),
+                  icon: const Icon(Icons.notifications,color:Colors.green,size: 35,),
                   tooltip: 'Open notification',
                   onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
                   }
@@ -131,10 +131,10 @@ class _HomePageState extends State<HomePage> {
           ),
 
         ],
-        backgroundColor: Colors.lime[100],leading: Builder(
+        backgroundColor: Colors.lime[50],leading: Builder(
         builder: (BuildContext context) {
           return IconButton(
-            icon: const Icon(Icons.account_circle,color:Color(0xFF7CB342),size: 35,),
+            icon: const Icon(Icons.account_circle,color:Colors.green,size: 35,),
             onPressed: () { Scaffold.of(context).openDrawer(); },
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
           );

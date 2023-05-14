@@ -7,50 +7,93 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 class detailsPage extends StatelessWidget {
-late int chanellIdDHt1;
-late int chanellIdMoisture1;
-late String ReadApiDHt;
-late String ReadApiMoisture;
- detailsPage({required this.chanellIdDHt1,required this.chanellIdMoisture1,required this.ReadApiMoisture,required this.ReadApiDHt});
+  late int chanellIdDHt1;
+  late int chanellIdMoisture1;
+  late String ReadApiDHt;
+  late String ReadApiMoisture;
+  int SelectedIndex = 0;
+  late int id;
+
+
+  detailsPage(
+      {required this.chanellIdDHt1, required this.chanellIdMoisture1, required this.ReadApiMoisture, required this.ReadApiDHt,required this.id});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(  routes: <String, WidgetBuilder>{
-      '/addProgram':(BuildContext context) =>add(),
-      '/EditProgram':(BuildContext context)=>editProgram(),
-      '/NotificationPage':(BuildContext context)=>notificationpage(),
+    List<Widget> _widgetOptions = <Widget>[add(id:id),editProgram(id:id), ];
+    return MaterialApp(routes: <String, WidgetBuilder>{
+      '/addProgram': (BuildContext context) => add(id:id,),
+      '/EditProgram': (BuildContext context) => editProgram(id:id),
+      '/NotificationPage': (BuildContext context) => notificationpage(),
     },
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(child:Scaffold(
-        appBar:  AppBar(
-          actions: [
-            Builder(
-              builder: (BuildContext context) {
-                return IconButton(
-                    icon: const Icon(Icons.notifications,color:Colors.green,size: 35,),
-                    tooltip: 'Open notification',
-                    onPressed: () {Navigator.pushNamed(context,'/NotificationPage',);
-                    }
-                );
-              },
+        debugShowCheckedModeBanner: false,
+        home: SafeArea(
+          child: Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              elevation: 80,
+              backgroundColor: Colors.lime[50],
+              iconSize: 27,
+              selectedItemColor: Colors.green,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add),
+                  label: 'Add Programm',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.edit),
+                  label: 'Edit Programm',
+                ),
+              ],
+      onTap: (int index) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => _widgetOptions.elementAt(index),
+          ),
+        );
+      },
+
             ),
+            appBar: AppBar(
+              actions: [
+                Builder(
+                  builder: (BuildContext context) {
+                    return IconButton(
+                        icon: const Icon(
+                          Icons.notifications, color: Colors.green, size: 35,),
+                        tooltip: 'Open notification',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/NotificationPage',);
+                        }
+                    );
+                  },
+                ),
 
-          ],
-          backgroundColor: Colors.lime[50],leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.green,size: 35),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-          leadingWidth: 105,
-          title:
-          Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize:27,fontFamily: 'Dancing',fontWeight: FontWeight.w500),),
-          centerTitle: true,),
+              ],
+              backgroundColor: Colors.lime[50],
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.green, size: 35),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              leadingWidth: 105,
+              title:
+              Text("fresh your plant", style: TextStyle(color: Colors.black,
+                  fontSize: 27,
+                  fontFamily: 'Dancing',
+                  fontWeight: FontWeight.w500),),
+              centerTitle: true,),
 
-        body: details(chanellIdDHt1: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1,ReadApiDHt:ReadApiDHt,ReadApiMoisture:ReadApiMoisture),
-      ),)
+            body: details(chanellIdDHt1: chanellIdDHt1,
+                chanellIdMoisture1: chanellIdMoisture1,
+                ReadApiDHt: ReadApiDHt,
+                ReadApiMoisture: ReadApiMoisture),
+          ),)
     );
   }
+
 }
 class details extends StatefulWidget {
+
    late int chanellIdDHt1;
    late int chanellIdMoisture1;
    late String ReadApiDHt;
@@ -62,6 +105,7 @@ class details extends StatefulWidget {
 }
 
 class _detailsState extends State<details> {
+
   late int ChanellId;
   late int chanellIdMoisture1;
   late String ReadApiDHt;
@@ -70,7 +114,6 @@ class _detailsState extends State<details> {
    double tempValue=0.0;
    double HumidityValue=0.0;
    double moistureValue=0.0;
-   //int ChanellId=data.ChanellIdDHt11;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +123,7 @@ class _detailsState extends State<details> {
     print("Temp:${tempValue}");
     print("Humidity:${HumidityValue}");
     print("Moisture:${moistureValue}");
+
    return Container(color:Colors.blueGrey[50],child:Stack(
 
      children: [
@@ -158,22 +202,21 @@ class _detailsState extends State<details> {
              ),
 
 
-             SizedBox(height: 115,),
+            // SizedBox(height: 115,),
 
-             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-               Container(color: Colors.green[200],height: 40,child: TextButton(onPressed: () =>Navigator.pushNamed(context,'/addProgram',), child: Text('Add pump program',style: TextStyle(color: Colors.black87))),),
-               Container(
-                 color: Colors.green[200],height: 40,
-                 child:TextButton(onPressed:()=>Navigator.pushNamed(context,'/EditProgram',), child: Text('Edit pump program ',style: TextStyle(color:Colors.black87),)),
-               )
-             ],)
+            //Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+              // Container(color: Colors.green[200],height: 40,child: TextButton(onPressed: () =>Navigator.pushNamed(context,'/addProgram',), child: Text('Add pump program',style: TextStyle(color: Colors.black87))),),
+               //Container(
+                 //color: Colors.green[200],height: 40,
+                 //child:TextButton(onPressed:()=>Navigator.pushNamed(context,'/EditProgram',), child: Text('Edit pump program ',style: TextStyle(color:Colors.black87),)),
+               //)
+             //],)
            ],),
        )
      ],) ,);
 
 
   }
-
 
 
   Future<dynamic> FeacthLastDataTempruter(int chanelId,String API) async {
@@ -225,5 +268,9 @@ class _detailsState extends State<details> {
       throw Exception('Failed to load data');
     }
   }
+
+
+
+
 }
 
