@@ -144,8 +144,8 @@ class _detailsState extends State<details> {
                CircularPercentIndicator(
                  radius: 60.0,
                  lineWidth: 10.0,
-                 percent: (moistureValue/10.23)/100,
-                 center: new Text("${moistureValue/10.23}%",style: TextStyle(fontSize: 23),),
+                 percent: (100-(moistureValue/10.23))/100,
+                 center: new Text("${(100-(moistureValue/10.23))}%",style: TextStyle(fontSize: 23),),
                  progressColor: Colors.green,
                ),
                SizedBox(height: 10),

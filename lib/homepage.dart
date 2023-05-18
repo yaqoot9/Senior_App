@@ -1,3 +1,4 @@
+import 'package:firstapp/Details.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firstapp/Widegts/widegts.dart';
@@ -21,7 +22,10 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     fetchLastDataColor1(2135841,'7SYVVV6AFB6OP1KG');
     fetchLastDataColor2(2135843,'UC6JISI0UASBNZ9T');
-   // fetchLastDataColor3( 2135844,'LIFRJCH2UKWR1PYD');
+    fetchLastDataColor3( 2135844,'LIFRJCH2UKWR1PYD');
+    bool isMouseOver = false;
+
+
     return Container(
       color:Colors.green[50],
       child:Column(
@@ -58,41 +62,65 @@ class _homepageState extends State<homepage> {
             viewportFraction: 0.8,
           ),
         ),
-        SizedBox(height: 5,),
         Text("     _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _",style: TextStyle(color: Colors.grey),),
-        SizedBox(height: 5,),
-        Text("   Notification",style: TextStyle(fontSize: 23,fontWeight: FontWeight.w700,color: Colors.black),),
-        SizedBox(height: 15,),
-        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
-          width: 375,
-          height: 55,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Pump 3 open at 3:45',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+
+        Stack(children: [
+          Transform.scale(
+            scale: 1.2,
+            child: Image.asset(
+            'assets/Farm.jpg',
+              width: 350, // original width
+              height: 285, // original height
+              fit: BoxFit.cover,
             ),
-          ),),
-        SizedBox(height: 8,),
-        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
-          width: 375,
-          height: 55,
-          child:Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Moisture level on 3:00 is below threshold', style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
-              textAlign: TextAlign.left,
-            ),
-          ),),
-        SizedBox(height: 8,),
-        Container(margin: EdgeInsets.only(left:5),color:Colors.lightGreen[200],
-          width: 375,
-          height: 55,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Pump 1 close at 5:15',style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
-            ),
-          ),),
+          ),
+
+         Center(child:Column(
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           children: [
+           Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+           GestureDetector(onDoubleTap: (){
+             Navigator.push(context,
+               MaterialPageRoute(
+                   builder: (context) =>detailsPage(chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)),);},
+               child:   Container(
+                 width: MediaQuery.of(context).size.width * 0.4, // Set the desired width here
+                 child:  Image.asset('assets/WaterPump1.png'),
+               )
+           ),
+           Container(color:Colors.lime[50],child:Text("Third pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
+         ],),
+
+             Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+               GestureDetector(onDoubleTap: (){
+                 Navigator.push(context,
+                   MaterialPageRoute(
+                       builder: (context) =>detailsPage(chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2)),);},
+                   child:   Container(
+                     width: MediaQuery.of(context).size.width * 0.4, // Set the desired width here
+                     child:  Image.asset('assets/WaterPump1.png'),
+                   )
+               ),
+               Container(color:Colors.lime[50],child:Text("Second pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
+             ],),
+
+
+             Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+               GestureDetector(onDoubleTap: (){
+                 Navigator.push(context,
+                 MaterialPageRoute(
+                 builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
+                   child:   Container(
+                     width: MediaQuery.of(context).size.width * 0.4, // Set the desired width here
+                     child:  Image.asset('assets/WaterPump1.png'),
+                   )
+               ),
+               Container(color:Colors.lime[50],child:Text("First pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
+              ],)
+
+           ],))
+
+        ],)
 
       ],
     ),);
@@ -160,3 +188,5 @@ print("pump color is:${pumpColor1}");
 
 
 }
+
+
