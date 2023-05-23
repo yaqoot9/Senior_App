@@ -123,8 +123,8 @@ class _MyprogramState extends State<Myprogram> {
         child:ListView(
       children: [
         Text(
-          "  You can see your irrigation programs for all pumps",
-          style: TextStyle(fontSize: 16),
+          "  Irrigation programs for pumps : ",
+          style: TextStyle(fontSize: 17,fontFamily: 'Courgette'),
         ),
         SizedBox(height: 40),
         _createDataTable(),
@@ -137,7 +137,7 @@ class _MyprogramState extends State<Myprogram> {
   Widget _createDataTable() {
     return Expanded(child:DataTable(
       dataRowHeight: 58 ,
-      columnSpacing: 3,
+      columnSpacing: 6,
 
 
       columns: [
@@ -149,10 +149,10 @@ class _MyprogramState extends State<Myprogram> {
       rows: irregationTable.map((data) {
         return DataRow(
           cells: [
-            DataCell(Text(data['id'].toString())),
-            DataCell(Text(data['days'],style: TextStyle(fontSize: 18),)),
-            DataCell(Text(data['duration'])),
-            DataCell(Text(data['time'])),
+            DataCell(Text(data['id'].toString(),style: TextStyle(fontFamily: 'Courgette'),)),
+            DataCell(Text(data['days'],style: TextStyle(fontSize: 18,fontFamily: 'Courgette'),)),
+            DataCell(Text(data['duration'],style: TextStyle(fontFamily: 'Courgette'))),
+            DataCell(Text(data['time'],style: TextStyle(fontFamily: 'Courgette'))),
           ],
         );
       }).toList(),
