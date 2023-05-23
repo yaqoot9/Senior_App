@@ -17,15 +17,17 @@ class _homepageState extends State<homepage> {
   late Color pumpColor1=Colors.white;
   late Color pumpColor2=Colors.white;
   late Color pumpColor3=Colors.white;
-
+  late bool isPump1on=false;
+  late bool isPump2on=false;
+  late bool isPump3on=false;
 
   Widget build(BuildContext context) {
     fetchLastDataColor1(2135841,'7SYVVV6AFB6OP1KG');
     fetchLastDataColor2(2135843,'UC6JISI0UASBNZ9T');
     fetchLastDataColor3( 2135844,'LIFRJCH2UKWR1PYD');
-    bool isMouseOver = false;
-
-
+    fetchPumpStatus(2135844,'LIFRJCH2UKWR1PYD',isPump3on);
+    fetchPumpStatus(2135844,'UC6JISI0UASBNZ9T',isPump2on);
+    fetchPumpStatus(2135844,'7SYVVV6AFB6OP1KG',isPump1on);
     return Container(
       color:Colors.green[50],
       child:Column(
@@ -42,11 +44,11 @@ class _homepageState extends State<homepage> {
         CarouselSlider(
           items: [
             //first item
-            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU' ,chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1),
+            SpecificsCard( pump_color: pumpColor1,pump_name: 'First Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU' ,chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1,isPumpOn: isPump1on,),
             //second item
-           SpecificsCard( pump_color:pumpColor2,pump_name: 'Second Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2),
+           SpecificsCard( pump_color:pumpColor2,pump_name: 'Second Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2,isPumpOn: isPump2on,),
             //third item
-            SpecificsCard( pump_color:pumpColor3,pump_name: 'Third Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)
+            SpecificsCard( pump_color:pumpColor3,pump_name: 'Third Pump',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_PQadkXnLpAdwfvCRqHNfvddN05dlj1sBZdaV0_0iTuVvMKTyFJrppyyymvHbvIZUCg&usqp=CAU',chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3,isPumpOn: isPump3on,)
 
           ],
 
@@ -187,6 +189,30 @@ print("pump color is:${pumpColor1}");
   }
 
 
+  Future<bool> fetchPumpStatus(int chanelId,String readAPI,bool isPumpon) async {
+    final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${readAPI}&results=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final pumpStatus = data['field2'];
+      print("PumpStatus${pumpStatus}");
+      isPumpon= pumpStatus == '1';
+      return pumpStatus == '1';
+    } else {
+      throw Exception('Failed to fetch pump status');
+    }
+  }
 }
 
+/*  @override
+  void initState() {
+    super.initState();
+    fetchPumpStatus().then((status) {
+      setState(() {
+        isPumpOn = status;
+      });
+    }).catchError((error) {
+      print('Error fetching pump status: $error');
+    });
+  }*/
 
