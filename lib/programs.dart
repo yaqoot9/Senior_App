@@ -71,8 +71,8 @@ class _MyprogramState extends State<Myprogram> {
     FirebaseDatabase.instance.ref().child("Schedule/${2}");
     dbref2.onValue.listen((event) {
       DataSnapshot dataSnapshot = event.snapshot;
-      dynamic data2 = dataSnapshot.value;
 
+      dynamic data2 = dataSnapshot.value;
 
       setState(() {
         time2 = data2['time'] ?? "";
@@ -124,11 +124,20 @@ class _MyprogramState extends State<Myprogram> {
       children: [
         Text(
           "  Irrigation programs for pumps : ",
-          style: TextStyle(fontSize: 17,fontFamily: 'Courgette'),
+          style: TextStyle(fontSize: 19,fontFamily: 'Courgette',color:Colors.green[500]),
         ),
         SizedBox(height: 40),
         _createDataTable(),
-        Image.asset('assets/plantPaper.jpg'),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+              'assets/Paper-removebg-preview.png',
+              width: 303, // Adjust the width of the image as per your requirement
+            ),
+          ],
+        ),
+
       ],
     )
     );
@@ -137,14 +146,21 @@ class _MyprogramState extends State<Myprogram> {
   Widget _createDataTable() {
     return Expanded(child:DataTable(
       dataRowHeight: 58 ,
-      columnSpacing: 6,
+      columnSpacing: 17,
+      dividerThickness: 2.0,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
+          width: 2.0, // Adjust the thickness of the border as per your requirement
+        ),
+      ),
 
 
       columns: [
-        DataColumn(label: Text('Pump#')),
-        DataColumn(label: Text('Days')),
-        DataColumn(label: Text('Duration')),
-        DataColumn(label: Text('Time')),
+        DataColumn(label: Text('Pump#', style: TextStyle(color:Colors.green[500]),)),
+        DataColumn(label: Text('Days',)),
+        DataColumn(label: Text('Duration',style: TextStyle(color:Colors.green[500]))),
+        DataColumn(label: Text('Time',)),
       ],
       rows: irregationTable.map((data) {
         return DataRow(
@@ -155,7 +171,9 @@ class _MyprogramState extends State<Myprogram> {
             DataCell(Text(data['time'],style: TextStyle(fontFamily: 'Courgette'))),
           ],
         );
-      }).toList(),
+
+      }
+      ).toList(),
     ));
   }
 }

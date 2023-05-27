@@ -81,8 +81,14 @@ flutter:
     - assets/Cover.jpg
     - assets/Farm.jpg
     - assets/WaterPump1.png
-    - assets/plantPaper.jpg
-
+    - assets/Paper-removebg-preview.png
+    - assets/waterTankjpg.jpg
+    - assets/WaterTank-removebg-preview.png
+    - assets/1Level.png
+    - assets/2Level.png
+    - assets/3Level.png
+    - assets/4Level.png
+    - assets/5Level.png
      #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

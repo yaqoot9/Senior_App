@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:firstapp/home.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +13,7 @@ class notificationpage extends StatelessWidget {
         '/HomePage': (BuildContext context) => Home(),
       },
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: SafeArea(child: Scaffold(
         appBar: AppBar(
           actions: [
             Builder(
@@ -19,7 +21,7 @@ class notificationpage extends StatelessWidget {
                 return IconButton(
                     icon: const Icon(
                       Icons.home,
-                      color: Color(0xFF7CB342),
+                      color: Color(0XFFECEFF1),
                       size: 35,
                     ),
                     onPressed: () {
@@ -31,20 +33,19 @@ class notificationpage extends StatelessWidget {
               },
             ),
           ],
-          backgroundColor: Colors.lime[100],
+          backgroundColor:Colors.cyan[600],
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Color(0xFF7CB342), size: 35),
+            icon: Icon(Icons.arrow_back, color: Colors.blueGrey[50], size: 35),
             onPressed: () => Navigator.of(context).pop(),
           ),
           leadingWidth: 105,
           title: Text(
-            "fresh your plant",
-            style: TextStyle(color: Colors.black, fontSize: 18),
+              "Water Tank",style: TextStyle(fontSize: 27,fontFamily:'Courgette',color:Colors.white),
           ),
           centerTitle: true,
         ),
         body: notification(),
-      ),
+      ),)
     );
   }
 }
@@ -57,96 +58,61 @@ class notification extends StatefulWidget {
 }
 
 class _notificationState extends State<notification> {
-  List<String> _values = [
-    'Pump 1 open on 2:00',
-    'Moisture level on 3:00 is below threshold',
-    'Pump 2 open on 3:55',
-    'Moisture level on 3:00 is below threshold',
-    'Pump 1 open on 2:00'
-  ];
+ late String img='assets/WaterTank-removebg-preview.png';
+ late double level=30;
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          //SizedBox(height: 30,),
-          //Text("Notifiaction",style:TextStyle(fontSize: 24,fontWeight: FontWeight.w700,color: Color(0xFF7CB342))),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 300,
-            child: ListView.separated(
-                separatorBuilder: (context, index) => Divider(
-                      color: Colors.black,
-                    ),
-                itemCount: _values.length,
-                padding: const EdgeInsets.all(5.0),
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    key: Key('item ${_values[index]}'),
-                    background: Container(
-                      color: Colors.red,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.delete, color: Colors.white),
-                            Text('Move to trash',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400)),
-                          ],
-                        ),
-                      ),
-                    ),
-                    confirmDismiss: (DismissDirection direction) async {
-                      return await showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Delete Confirmation"),
-                            content: Text(
-                                "Are you sure you want to delete this notification?"),
-                            actions: <Widget>[
-                              TextButton(
-                                  onPressed: () =>
-                                      Navigator.of(context).pop(true),
-                                  child: const Text("Delete")),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(false),
-                                child: const Text("Cancel"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    onDismissed: (DismissDirection direction) {
-                      if (direction == DismissDirection.startToEnd) {
-                        print("Remove item");
-                      }
 
-                      setState(() {
-                        _values.removeAt(index);
-                      });
-                    },
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.notifications_active_outlined,
-                        size: 30,
-                        color: Color(0xFF7CB342),
-                      ),
-                      title: Text(_values[index],
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.w500)),
-                    ),
-                  );
-                }),
-          ),
-        ],
-      ),
-    );
+
+  Widget build(BuildContext context) {
+    setState(() {
+      featchWaterLevel();
+    });
+
+      setState(() {
+        if(level<5)
+          img='assets/WaterTank-removebg-preview.png';
+
+        else if(level<10)
+          img='assets/2Level.png';
+
+        else if(level<15)
+          img='assets/3Level.png';
+
+        else if(level<20)
+          img='assets/4Level.png';
+
+        else
+          img='assets/5Level.png';
+      });
+    String formattedLevel = (30 - level).toStringAsFixed(2);
+    return Container(color: Colors.blueGrey[50],
+    child:Center(
+        child:Column
+          (mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Image.asset(img,width:300),
+        SizedBox(height:85,),
+        Text("Water tank height is 30 cm ",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),
+        Text("Water level in your tank is: $formattedLevel cm",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),
+
+
+        ],)
+    )) ;
   }
+ Future<dynamic> featchWaterLevel() async {
+   final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/2162807/fields/1/last.json?api_key=798N0VFXW903UL2K&results=1'));
+
+   if (response.statusCode == 200) {
+     final data = json.decode(response.body);
+     final WaterLevel = data['field1'];
+     level=double.parse(WaterLevel);
+     print("Water Level in Tank is : ${WaterLevel} " );
+     return WaterLevel;
+   } else {
+     throw Exception('Failed to fetch pump status');
+   }
+ }
 }
+
+
+
