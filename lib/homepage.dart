@@ -78,47 +78,88 @@ class _homepageState extends State<homepage> {
           ),
 
          Center(child:Column(
-           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-           Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+             SizedBox(height: 85,),
+           Row(mainAxisAlignment: MainAxisAlignment.start,
+             children: [
+             SizedBox(width: 40,),
            GestureDetector(onDoubleTap: (){
              Navigator.push(context,
                MaterialPageRoute(
                    builder: (context) =>detailsPage(chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)),);},
-               child:   Container(
-                 width: MediaQuery.of(context).size.width * 0.4, // Set the desired width here
-                 child:  Image.asset('assets/WaterPump1.png'),
-               )
-           ),
-           Container(color:Colors.lime[50],child:Text("Third pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
-         ],),
+               child:   Container(decoration: BoxDecoration(
+                   color: Colors.amber[50],
+                   shape: BoxShape.circle
+               ),
+                   width: 65,height:65, // Set the desired width here
+                   child: Container(child: Center(child:Column( children:[
+                     Icon(Icons.water_drop,
+                       size: 30,
+                       color: Colors.blue,
 
-             Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+                     ), Text("First Pump",style: TextStyle(fontSize: 12 , fontWeight: FontWeight.bold),)
+
+
+                   ])),
+                   ))
+           ),
+           ],),
+           //Container(color:Colors.lime[50],child:Text("Third pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
+
+
+             SizedBox(height: 15,),
                GestureDetector(onDoubleTap: (){
                  Navigator.push(context,
                    MaterialPageRoute(
                        builder: (context) =>detailsPage(chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2)),);},
-                   child:   Container(
-                     width: MediaQuery.of(context).size.width * 0.4, // Set the desired width here
-                     child:  Image.asset('assets/WaterPump1.png'),
-                   )
+                   child:    Container(decoration: BoxDecoration(
+                       color: Colors.amber[50],
+                       shape: BoxShape.circle
+                   ),
+                       width: 65,height: 65, // Set the desired width here
+                       child: Container(child: Center(child:Column( children:[
+                         Icon(Icons.water_drop,
+                           color: Colors.blue,
+                           size: 30,
+
+                         ), Text("Second Pump",style: TextStyle(fontSize: 10,  fontWeight: FontWeight.bold),)
+
+
+                       ])),
+                       ))
                ),
-               Container(color:Colors.lime[50],child:Text("Second pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
-             ],),
+             SizedBox(height: 15,),
+              // Container(color:Colors.lime[50],child:Text("Second pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
 
 
-             Row(mainAxisAlignment:MainAxisAlignment.center,children: [
-               GestureDetector(onDoubleTap: (){
+               Row(mainAxisAlignment:MainAxisAlignment.end,children: [GestureDetector(onDoubleTap: (){
                  Navigator.push(context,
-                 MaterialPageRoute(
-                 builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
-                   child:   Container(
-                     width: MediaQuery.of(context).size.width * 0.4, // Set the desired width here
-                     child:  Image.asset('assets/WaterPump1.png'),
-                   )
-               ),
-               Container(color:Colors.lime[50],child:Text("First pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
-              ],)
+                   MaterialPageRoute(
+                       builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
+                   child:   Container(decoration: BoxDecoration(
+                       color: Colors.amber[50],
+                       shape: BoxShape.circle
+                   ),
+                       width: 65,height: 65, // Set the desired width here
+                       child: Container(child: Center(child:Column( children:[
+                         Icon(Icons.water_drop,
+                           color: Colors.blue,
+                           size: 30,
+
+                         ), Text("Third Pump",style: TextStyle(fontSize: 12,  fontWeight: FontWeight.bold),)
+
+
+
+
+
+
+                       ])),
+                       ))
+               ),SizedBox(width: 40,)],)
+               //Container(color:Colors.lime[50],child:Text("First pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
+
 
            ],))
 

@@ -92,8 +92,14 @@ class _notificationState extends State<notification> {
           children: [
           Image.asset(img,width:300),
         SizedBox(height:85,),
-        Text("Water tank height is 30 cm ",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),
-        Text("Water level in your tank is: $formattedLevel cm",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),
+       // Text("Water tank height is 30 cm ",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),
+       Container(padding: EdgeInsets.all(17),decoration: BoxDecoration(
+         color: (30 - level) < 10 ? Colors.deepOrange[300] : Colors.white24,
+         border: Border.all(
+           color: Colors.black,
+           width: 3.0,
+         ),
+       ),child:Text("Water level : $formattedLevel cm",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),)
 
 
         ],)

@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
       ),
         leadingWidth: 105,
         title:
-        Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 18,fontFamily: 'Dancing'),),
+        Text("fresh your plant",style: TextStyle(color: Colors.black,fontSize: 23,fontFamily: 'Courgette'),),
 
         centerTitle: true,),
 

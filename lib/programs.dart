@@ -1,4 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firstapp/editProgram.dart';
 import 'package:flutter/material.dart';
 
 
@@ -55,6 +73,7 @@ class _MyprogramState extends State<Myprogram> {
         time1 = data1['time'] ?? "";
         speed1 = data1['speed'] ?? "";
         duration1 = data1['duration'] ?? "";
+
         days1 = data1['days'] ?? "";
       });
       irregationTable.add(   {
@@ -62,6 +81,7 @@ class _MyprogramState extends State<Myprogram> {
         'days': days1,
         'duration':duration1,
         'time': time1,
+
       });
 
     });
@@ -122,11 +142,12 @@ class _MyprogramState extends State<Myprogram> {
       //color:Colors.lime[50],
         child:ListView(
       children: [
-        Text(
-          "  Irrigation programs for pumps : ",
-          style: TextStyle(fontSize: 19,fontFamily: 'Courgette',color:Colors.green[500]),
-        ),
-        SizedBox(height: 40),
+        Container(width:8,height: 50,color: Colors.white24, child: Center(child:Text(
+          "  Irrigation programs for pumps ",
+          style: TextStyle(fontSize: 19,fontFamily: 'Courgette'),
+        ),) ),
+
+        SizedBox(height: 20),
         _createDataTable(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -144,10 +165,11 @@ class _MyprogramState extends State<Myprogram> {
   }
 
   Widget _createDataTable() {
-    return Expanded(child:DataTable(
-      dataRowHeight: 58 ,
-      columnSpacing: 17,
-      dividerThickness: 2.0,
+    return DataTable(
+      dataRowHeight: 70 ,
+      columnSpacing: 7,
+      dividerThickness:
+      3.0,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
@@ -157,10 +179,11 @@ class _MyprogramState extends State<Myprogram> {
 
 
       columns: [
-        DataColumn(label: Text('Pump#', style: TextStyle(color:Colors.green[500]),)),
-        DataColumn(label: Text('Days',)),
-        DataColumn(label: Text('Duration',style: TextStyle(color:Colors.green[500]))),
-        DataColumn(label: Text('Time',)),
+        DataColumn(label: Center(child:Text('Pump#'))),
+        DataColumn(label:Center(child:Text('Days',)) ),
+        DataColumn(label: Center(child:Text('Duration'))),
+        DataColumn(label: Center(child:Text('Time',))),
+        DataColumn(label: Center(child:Text('Edit',))),
       ],
       rows: irregationTable.map((data) {
         return DataRow(
@@ -169,11 +192,17 @@ class _MyprogramState extends State<Myprogram> {
             DataCell(Text(data['days'],style: TextStyle(fontSize: 18,fontFamily: 'Courgette'),)),
             DataCell(Text(data['duration'],style: TextStyle(fontFamily: 'Courgette'))),
             DataCell(Text(data['time'],style: TextStyle(fontFamily: 'Courgette'))),
+            DataCell(Container(width: 30,height: 30,color: Colors.lightGreen[200],child:TextButton(  onPressed: () {
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => editProgram(id:data['id'])),
+        );
+        },child:Center(child:Icon(Icons.edit_sharp,size: 19,color:Colors.black),)))),
           ],
         );
 
       }
       ).toList(),
-    ));
+    );
   }
 }

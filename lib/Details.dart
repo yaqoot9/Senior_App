@@ -78,8 +78,8 @@ class detailsPage extends StatelessWidget {
               leadingWidth: 105,
               title:
               Text("fresh your plant", style: TextStyle(color: Colors.black,
-                  fontSize: 27,
-                  fontFamily: 'Dancing',
+                  fontSize: 23,
+                  fontFamily: 'Courgette',
                   fontWeight: FontWeight.w500),),
               centerTitle: true,),
 
@@ -145,7 +145,7 @@ class _detailsState extends State<details> {
                  radius: 60.0,
                  lineWidth: 10.0,
                  percent: (100-(moistureValue/10.23))/100,
-                 center: new Text("${(100-(moistureValue/10.23))}%",style: TextStyle(fontSize: 23),),
+                 center: new Text("${(100-(moistureValue/10.23)).toStringAsFixed(2)}%",style: TextStyle(fontSize: 23),),
                  progressColor: Colors.green,
                ),
                SizedBox(height: 10),
