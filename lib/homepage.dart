@@ -70,7 +70,7 @@ class _homepageState extends State<homepage> {
           Transform.scale(
             scale: 1.2,
             child: Image.asset(
-            'assets/Farm.jpg',
+            'assets/Farm.PNG',
               width: 350, // original width
               height: 285, // original height
               fit: BoxFit.cover,
@@ -81,7 +81,7 @@ class _homepageState extends State<homepage> {
 
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-             SizedBox(height: 85,),
+             SizedBox(height: 20,),
            Row(mainAxisAlignment: MainAxisAlignment.start,
              children: [
              SizedBox(width: 40,),
@@ -90,16 +90,13 @@ class _homepageState extends State<homepage> {
                MaterialPageRoute(
                    builder: (context) =>detailsPage(chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)),);},
                child:   Container(decoration: BoxDecoration(
-                   color: Colors.amber[50],
+                   color: Colors.lime[50],
                    shape: BoxShape.circle
                ),
-                   width: 65,height:65, // Set the desired width here
+                   width:88,height:88, // Set the desired width here
                    child: Container(child: Center(child:Column( children:[
-                     Icon(Icons.water_drop,
-                       size: 30,
-                       color: Colors.blue,
-
-                     ), Text("First Pump",style: TextStyle(fontSize: 12 , fontWeight: FontWeight.bold),)
+                     Image.asset('assets/Pumpp-removebg-preview.png',height: 65,)
+                     , Text("First Pump",style: TextStyle(fontSize: 12 , fontWeight: FontWeight.bold),)
 
 
                    ])),
@@ -109,28 +106,25 @@ class _homepageState extends State<homepage> {
            //Container(color:Colors.lime[50],child:Text("Third pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
 
 
-             SizedBox(height: 15,),
+             SizedBox(height: 5,),
                GestureDetector(onDoubleTap: (){
                  Navigator.push(context,
                    MaterialPageRoute(
                        builder: (context) =>detailsPage(chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2)),);},
                    child:    Container(decoration: BoxDecoration(
-                       color: Colors.amber[50],
+                       color: Colors.lime[50],
                        shape: BoxShape.circle
                    ),
-                       width: 65,height: 65, // Set the desired width here
+                       width: 88,height:88, // Set the desired width here
                        child: Container(child: Center(child:Column( children:[
-                         Icon(Icons.water_drop,
-                           color: Colors.blue,
-                           size: 30,
-
-                         ), Text("Second Pump",style: TextStyle(fontSize: 10,  fontWeight: FontWeight.bold),)
+                         Image.asset('assets/Pumpp-removebg-preview.png',height: 65,)
+                         , Text("Second Pump",style: TextStyle(fontSize: 12,  fontWeight: FontWeight.bold),)
 
 
                        ])),
                        ))
                ),
-             SizedBox(height: 15,),
+             SizedBox(height: 5,),
               // Container(color:Colors.lime[50],child:Text("Second pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
 
 
@@ -139,16 +133,14 @@ class _homepageState extends State<homepage> {
                    MaterialPageRoute(
                        builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
                    child:   Container(decoration: BoxDecoration(
-                       color: Colors.amber[50],
+                       color: Colors.lime[50],
                        shape: BoxShape.circle
                    ),
-                       width: 65,height: 65, // Set the desired width here
+                       width:88,height: 88, // Set the desired width here
                        child: Container(child: Center(child:Column( children:[
-                         Icon(Icons.water_drop,
-                           color: Colors.blue,
-                           size: 30,
+                        Image.asset('assets/Pumpp-removebg-preview.png',height: 65,)
 
-                         ), Text("Third Pump",style: TextStyle(fontSize: 12,  fontWeight: FontWeight.bold),)
+                         , Text("Third Pump",style: TextStyle(fontSize: 13,  fontWeight: FontWeight.bold,color:Colors.brown),)
 
 
 
@@ -157,7 +149,7 @@ class _homepageState extends State<homepage> {
 
                        ])),
                        ))
-               ),SizedBox(width: 40,)],)
+               ),SizedBox(width: 20,)],)
                //Container(color:Colors.lime[50],child:Text("First pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
 
 

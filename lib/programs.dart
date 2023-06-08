@@ -193,10 +193,10 @@ class _MyprogramState extends State<Myprogram> {
             DataCell(Text(data['duration'],style: TextStyle(fontFamily: 'Courgette'))),
             DataCell(Text(data['time'],style: TextStyle(fontFamily: 'Courgette'))),
             DataCell(Container(width: 30,height: 30,color: Colors.lightGreen[200],child:TextButton(  onPressed: () {
-        Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => editProgram(id:data['id'])),
-        );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => editProgram(id: data['id'])),
+              );
         },child:Center(child:Icon(Icons.edit_sharp,size: 19,color:Colors.black),)))),
           ],
         );

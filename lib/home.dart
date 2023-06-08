@@ -1,5 +1,6 @@
 import 'package:firstapp/Details.dart';
 import 'package:firstapp/Login.dart';
+import 'package:firstapp/help.dart';
 import 'package:firstapp/homepage.dart';
 import 'package:firstapp/notification.dart';
 import 'package:firstapp/programs.dart';
@@ -12,7 +13,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/NotificationPage':(BuildContext context) =>notificationpage (),
-       // '/DeteilsPage':(BuildContext context)=>detailsPage(ChanellId: ChanellId),
+      '/helpPage':(BuildContext context)=> HelpPage(),
         '/login':(BuildContext context)=>LoginPage(),
         '/myprogram':(BuildContext context)=>programmsPage(),
       },
@@ -81,13 +82,7 @@ class _HomePageState extends State<HomePage> {
                 Text("Ahmad@gmail.com")
               ],),
             ),),
-
-            Builder(builder: (context)=>ListTile(
-              leading: Icon(Icons.person),
-              title: Text("User information"),
-              // onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
-            )),
-
+            
             Builder(builder: (context)=>
                 ListTile(
                     leading: Icon(Icons.date_range),
@@ -105,7 +100,7 @@ class _HomePageState extends State<HomePage> {
             Builder(builder: (context)=>ListTile(
               leading: Icon(Icons.help),
               title: Text("Help"),
-              // onTap:() {Navigator.pushNamed(context,'/NotificationPage');}
+              onTap:() {Navigator.pushNamed(context,'/helpPage');}
             ) ) ,
 
             Builder(builder: (context)=>ListTile(

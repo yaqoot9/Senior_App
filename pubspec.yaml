@@ -90,6 +90,8 @@ flutter:
     - assets/4Level.png
     - assets/5Level.png
     - assets/WoodArrow.jpg
+    - assets/Farm.PNG
+    - assets/Pumpp-removebg-preview.png
      #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
