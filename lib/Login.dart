@@ -129,6 +129,10 @@ class _LoginState extends State<Login> {
                   ConstrainedBox(
                     constraints: BoxConstraints.tightFor(width: 230),
                     child:ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green, // Set the desired background color
+                        // You can also customize other properties such as padding, shape, etc.
+                      ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           try {

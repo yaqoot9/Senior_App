@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(children: [
                 CircleAvatar(
                   radius: 40, // Image radius
-                  backgroundImage: NetworkImage("https://th.bing.com/th/id/OIP.K7lG3005eY-tEHwlxf61qgHaFx?pid=ImgDet&rs=1"),
+                  backgroundImage: AssetImage("assets/pumpFarmer.jpg"),
                 ),
                 Text("Ahmad Awad",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                 Text("Ahmad@gmail.com")

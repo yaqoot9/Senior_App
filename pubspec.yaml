@@ -101,6 +101,10 @@ flutter:
     - assets/Pumpp-removebg-preview.png
     - assets/app_Logo.png
     - assets/WaterPump-removebg-preview.png
+    - assets/HomePageHelp.jpg
+    - assets/WaterTankHelp.jpg
+    - assets/DetailsHelp.jpg
+    - assets/pumpFarmer.jpg
      #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

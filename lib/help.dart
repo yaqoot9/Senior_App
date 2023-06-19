@@ -57,19 +57,19 @@ class _AppGuideState extends State<AppGuide> {
   int _currentIndex = 0;
   List<Widget> _pages = [
     GuidePage(
-      title: 'Welcome to fresh your plant',
-      description: 'This is a sample app guide.',
-      imagePath: 'assets/app_Logo.png',
+      title: 'Home page',
+      description: 'Home page guide',
+      imagePath: 'assets/HomePageHelp.jpg',
     ),
     GuidePage(
-      title: 'Page 2',
-      description: 'This is the second page of the guide.',
-      imagePath: 'assets/app_Logo.png',
+      title: 'Details page ',
+      description: 'Details page guide',
+      imagePath: 'assets/DetailsHelp.jpg',
     ),
     GuidePage(
-      title: 'Page 3',
-      description: 'This is the third page of the guide.',
-      imagePath: 'assets/app_Logo.png',
+      title: 'Water Tank page ',
+      description: 'Water Tank page guide',
+      imagePath: 'assets/WaterTankHelp.jpg',
     ),
   ];
 
@@ -160,8 +160,8 @@ class GuidePage extends StatelessWidget {
           SizedBox(height: 32),
           Image.asset(
             imagePath,
-            width: 200,
-            height: 200,
+            width: 350,
+            height: 350,
           ),
         ],
       ),
