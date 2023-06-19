@@ -51,7 +51,7 @@ class SpecificsCard extends StatelessWidget {
       Positioned(
           top:65,left: 210,
           child:
-          GestureDetector(onDoubleTap: (){Navigator.push(
+          GestureDetector(onTap: (){Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) =>detailsPage(chanellIdDHt1: chanellIdDHt1,chanellIdMoisture1:chanellIdMoisture1,ReadApiMoisture:ReadApiMoisture,ReadApiDHt:ReadApiDHt,id: id,)),

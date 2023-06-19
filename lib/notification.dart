@@ -69,22 +69,18 @@ class _notificationState extends State<notification> {
   Widget build(BuildContext context) {
 
 
-      setState(() {
-        if(level<5)
-          img='assets/WaterTank-removebg-preview.png';
-
-        else if(level<10)
-          img='assets/2Level.png';
-
-        else if(level<15)
-          img='assets/3Level.png';
-
-        else if(level<20)
-          img='assets/4Level.png';
-
-        else
-          img='assets/5Level.png';
-      });
+    setState(() {
+      if (level < 5)
+        img = 'assets/WaterTank-removebg-preview.png';
+      else if (level < 10)
+        img = 'assets/2Level.png';
+      else if (level < 15)
+        img = 'assets/3Level.png';
+      else if (level < 20)
+        img = 'assets/4Level.png';
+      else
+        img = 'assets/5Level.png';
+    });
     String formattedLevel = (30 - level).toStringAsFixed(2);
     return Container(color: Colors.blueGrey[50],
     child:Center(
@@ -107,14 +103,17 @@ class _notificationState extends State<notification> {
     )) ;
   }
  Future<dynamic> featchWaterLevel() async {
-   final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/2162807/fields/1/last.json?api_key=798N0VFXW903UL2K&results=1'));
+   final response = await http.get(Uri.parse(
+       'https://api.thingspeak.com/channels/2162807/fields/1/last.json?api_key=798N0VFXW903UL2K&results=1'));
 
    if (response.statusCode == 200) {
      final data = json.decode(response.body);
-     final WaterLevel = data['field1'];
-     level=double.parse(WaterLevel);
-     print("Water Level in Tank is : ${WaterLevel} " );
-     return WaterLevel;
+     final waterLevel = double.parse(data['field1']);
+     setState(() {
+       level = waterLevel;
+     });
+     print("Water Level in Tank is : $waterLevel");
+     return waterLevel;
    } else {
      throw Exception('Failed to fetch pump status');
    }

@@ -90,7 +90,7 @@ class _homepageState extends State<homepage> {
             child: Image.asset(
             'assets/Farm.jpg',
               width: 370, // original width
-              height: 285, // original height
+              height: 300, // original height
               fit: BoxFit.cover,
             ),
           ),
@@ -103,7 +103,7 @@ class _homepageState extends State<homepage> {
            Row(mainAxisAlignment: MainAxisAlignment.start,
              children: [
              SizedBox(width: 18,),
-           GestureDetector(onDoubleTap: (){
+           GestureDetector(onTap: (){
              Navigator.push(context,
                MaterialPageRoute(
                    builder: (context) =>detailsPage(chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)),);},
@@ -125,7 +125,7 @@ class _homepageState extends State<homepage> {
 
 
              SizedBox(height: 5,),
-               GestureDetector(onDoubleTap: (){
+               GestureDetector(onTap: (){
                  Navigator.push(context,
                    MaterialPageRoute(
                        builder: (context) =>detailsPage(chanellIdDHt1:2135825,ReadApiDHt:'6L6DZVCJMKHUKZCL',chanellIdMoisture1:2135843,ReadApiMoisture:'UC6JISI0UASBNZ9T',id:2)),);},
@@ -146,7 +146,7 @@ class _homepageState extends State<homepage> {
               // Container(color:Colors.lime[50],child:Text("Second pump",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),))
 
 
-               Row(mainAxisAlignment:MainAxisAlignment.end,children: [GestureDetector(onDoubleTap: (){
+               Row(mainAxisAlignment:MainAxisAlignment.end,children: [GestureDetector(onTap: (){
                  Navigator.push(context,
                    MaterialPageRoute(
                        builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
