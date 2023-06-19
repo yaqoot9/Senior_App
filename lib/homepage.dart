@@ -21,13 +21,31 @@ class _homepageState extends State<homepage> {
   late bool isPump2on=false;
   late bool isPump3on=false;
 
+
+  @override
+  void initState() {
+    super.initState();
+    //fetchLastDataColor1(2135841, '7SYVVV6AFB6OP1KG');
+    fetchLastDataColor1(2135841, '7SYVVV6AFB6OP1KG').then((data) {
+      setState(() {
+        if (data.compareTo("500") > 0) {
+          pumpColor1 = Colors.green;
+        } else {
+          pumpColor1 = Colors.red;
+        }
+      });
+    }).catchError((error) {
+      print('Error fetching pump color: $error');
+    });
+
+    fetchLastDataColor2(2135843, 'UC6JISI0UASBNZ9T');
+    fetchLastDataColor3(2135844, 'LIFRJCH2UKWR1PYD');
+    fetchPumpStatus(2135844, 'LIFRJCH2UKWR1PYD', isPump3on);
+    fetchPumpStatus(2135844, 'UC6JISI0UASBNZ9T', isPump2on);
+    fetchPumpStatus(2135844, '7SYVVV6AFB6OP1KG', isPump1on);
+  }
+
   Widget build(BuildContext context) {
-    fetchLastDataColor1(2135841,'7SYVVV6AFB6OP1KG');
-    fetchLastDataColor2(2135843,'UC6JISI0UASBNZ9T');
-    fetchLastDataColor3( 2135844,'LIFRJCH2UKWR1PYD');
-    fetchPumpStatus(2135844,'LIFRJCH2UKWR1PYD',isPump3on);
-    fetchPumpStatus(2135844,'UC6JISI0UASBNZ9T',isPump2on);
-    fetchPumpStatus(2135844,'7SYVVV6AFB6OP1KG',isPump1on);
     return Container(
       color:Colors.green[50],
       child:Column(
@@ -70,8 +88,8 @@ class _homepageState extends State<homepage> {
           Transform.scale(
             scale: 1.2,
             child: Image.asset(
-            'assets/Farm.PNG',
-              width: 350, // original width
+            'assets/Farm.jpg',
+              width: 370, // original width
               height: 285, // original height
               fit: BoxFit.cover,
             ),
@@ -81,10 +99,10 @@ class _homepageState extends State<homepage> {
 
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-             SizedBox(height: 20,),
+             SizedBox(height: 49,),
            Row(mainAxisAlignment: MainAxisAlignment.start,
              children: [
-             SizedBox(width: 40,),
+             SizedBox(width: 18,),
            GestureDetector(onDoubleTap: (){
              Navigator.push(context,
                MaterialPageRoute(
@@ -140,7 +158,7 @@ class _homepageState extends State<homepage> {
                        child: Container(child: Center(child:Column( children:[
                         Image.asset('assets/Pumpp-removebg-preview.png',height: 65,)
 
-                         , Text("Third Pump",style: TextStyle(fontSize: 13,  fontWeight: FontWeight.bold,color:Colors.brown),)
+                         , Text("Third Pump",style: TextStyle(fontSize: 13,fontWeight:FontWeight.bold,color:Colors.black),)
 
 
 

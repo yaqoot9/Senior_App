@@ -60,13 +60,14 @@ class notification extends StatefulWidget {
 class _notificationState extends State<notification> {
  late String img='assets/WaterTank-removebg-preview.png';
  late double level=30;
+
   @override
-
-
+  void initState() {
+    super.initState();
+    featchWaterLevel();
+  }
   Widget build(BuildContext context) {
-    setState(() {
-      featchWaterLevel();
-    });
+
 
       setState(() {
         if(level<5)

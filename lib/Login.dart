@@ -129,9 +129,6 @@ class _LoginState extends State<Login> {
                   ConstrainedBox(
                     constraints: BoxConstraints.tightFor(width: 230),
                     child:ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.green), // Set the background color
-                      ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           try {
@@ -153,7 +150,7 @@ class _LoginState extends State<Login> {
                               if (passwordFromDatabase == _passwordController.text.trim()) {
                                 // Email and password match, sign in the user
                                 try {
-                                 /* await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                  /* await FirebaseAuth.instance.signInWithEmailAndPassword(
                                     email: emailFromDatabase,
                                     password: passwordFromDatabase,
                                   );*/
@@ -186,7 +183,7 @@ class _LoginState extends State<Login> {
                       },
                       child: Text(
                         'Login',
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19,),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 19,color:Colors.green[900]),
                       ),
                     ),
 
