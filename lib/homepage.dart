@@ -106,7 +106,7 @@ class _homepageState extends State<homepage> {
            GestureDetector(onTap: (){
              Navigator.push(context,
                MaterialPageRoute(
-                   builder: (context) =>detailsPage(chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)),);},
+                   builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
                child:   Container(decoration: BoxDecoration(
                    color: Colors.lime[50],
                    shape: BoxShape.circle
@@ -149,7 +149,7 @@ class _homepageState extends State<homepage> {
                Row(mainAxisAlignment:MainAxisAlignment.end,children: [GestureDetector(onTap: (){
                  Navigator.push(context,
                    MaterialPageRoute(
-                       builder: (context) =>detailsPage(chanellIdDHt1: 2132322,ReadApiDHt:'8HWE9I4YWWDAP904',chanellIdMoisture1:2135841,ReadApiMoisture:'7SYVVV6AFB6OP1KG',id:1)),);},
+                       builder: (context) =>detailsPage(chanellIdDHt1:2135828,ReadApiDHt:'KU3W1EOT0ZF38X8J',chanellIdMoisture1:2135844,ReadApiMoisture:'LIFRJCH2UKWR1PYD',id:3)));},
                    child:   Container(decoration: BoxDecoration(
                        color: Colors.lime[50],
                        shape: BoxShape.circle

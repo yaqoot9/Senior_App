@@ -370,7 +370,7 @@ class _AddProgramState extends State<AddProgram> {
                             'date': dateController.text,
                             'time': timeController.text,
                             'duration': currentValue.toString(),
-                            'days': jsonEncode(daysOfWeek),
+                            'days': daysOfWeek,
                             'speed': statusValue.toString()
                           });
                           //Id=Id+1;

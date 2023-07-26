@@ -59,7 +59,7 @@ class notification extends StatefulWidget {
 
 class _notificationState extends State<notification> {
  late String img='assets/WaterTank-removebg-preview.png';
- late double level=30;
+ late double level=10;
 
   @override
   void initState() {
@@ -70,18 +70,18 @@ class _notificationState extends State<notification> {
 
 
     setState(() {
-      if (level < 5)
+      if (level < 2)
         img = 'assets/WaterTank-removebg-preview.png';
-      else if (level < 10)
+      else if (level < 4)
         img = 'assets/2Level.png';
-      else if (level < 15)
+      else if (level < 6)
         img = 'assets/3Level.png';
-      else if (level < 20)
+      else if (level < 8)
         img = 'assets/4Level.png';
       else
         img = 'assets/5Level.png';
     });
-    String formattedLevel = (30 - level).toStringAsFixed(2);
+    String formattedLevel = (10 - level).toStringAsFixed(2);
     return Container(color: Colors.blueGrey[50],
     child:Center(
         child:Column
@@ -91,7 +91,7 @@ class _notificationState extends State<notification> {
         SizedBox(height:85,),
        // Text("Water tank height is 30 cm ",style: TextStyle(fontSize: 23,fontFamily:'Courgette')),
        Container(padding: EdgeInsets.all(17),decoration: BoxDecoration(
-         color: (30 - level) < 10 ? Colors.deepOrange[300] : Colors.white24,
+         color: (10 - level) < 3 ? Colors.deepOrange[300] : Colors.white24,
          border: Border.all(
            color: Colors.black,
            width: 3.0,

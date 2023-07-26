@@ -161,7 +161,7 @@ class _EditProgramState extends State<EditProgram> {
         timeController.text = data['time'];
         statusValue = data['speed'];
         currentValue = int.parse(data['duration']);
-        daysOfWeek=[...jsonDecode(data['days'])];
+        daysOfWeek=[...(data['days'])];
         print( "after${daysOfWeek}");
         dayObjects = daysOfWeek.map((day) => DayInWeek(day)).toList();
         print("yaqoot ${dayObjects}");
@@ -412,7 +412,7 @@ class _EditProgramState extends State<EditProgram> {
                               'date': dateController.text,
                               'time': timeController.text,
                               'duration': currentValue.toString(),
-                              'days': jsonEncode(daysOfWeek),
+                              'days': (daysOfWeek),
                               'speed': statusValue.toString()
                               // add as many fields as you want to update
                             });

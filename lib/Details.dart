@@ -237,15 +237,15 @@ class _detailsState extends State<details> {
 
   Future<dynamic> FeacthLastDataTempruter(int chanelId, String API) async {
     final response = await http.get(Uri.parse(
-      'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${API}&results=1',
+      'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${API}&results=1',
     ));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
-        tempValue = double.parse(data['field2']);
+        tempValue = double.parse(data['field1']);
       });
-      return data['field2'];
+      return data['field1'];
     } else {
       throw Exception('Failed to load data');
     }
@@ -253,15 +253,15 @@ class _detailsState extends State<details> {
 
   Future<dynamic> FeacthLastDataHumidity(int chanelId, String API) async {
     final response = await http.get(Uri.parse(
-      'https://api.thingspeak.com/channels/${chanelId}/fields/1/last.json?api_key=${API}&results=1',
+      'https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${API}&results=1',
     ));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
-        HumidityValue = double.parse(data['field1']);
+        HumidityValue = double.parse(data['field2']);
       });
-      return data['field1'];
+      return data['field2'];
     } else {
       throw Exception('Failed to load data');
     }
