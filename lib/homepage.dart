@@ -24,11 +24,10 @@ class _homepageState extends State<homepage> {
 
   @override
   void initState() {
-    super.initState();
-    //fetchLastDataColor1(2135841, '7SYVVV6AFB6OP1KG');
+
     fetchLastDataColor1(2135841, '7SYVVV6AFB6OP1KG').then((data) {
       setState(() {
-        if (data.compareTo("500") > 0) {
+        if (data.compareTo("700") > 0) {
           pumpColor1 = Colors.green;
         } else {
           pumpColor1 = Colors.red;
@@ -37,12 +36,32 @@ class _homepageState extends State<homepage> {
     }).catchError((error) {
       print('Error fetching pump color: $error');
     });
+    fetchLastDataColor2(2135843,'UC6JISI0UASBNZ9T').then((data) {
+      setState(() {
+        if (data.compareTo("700") > 0) {
+          pumpColor2 = Colors.green;
+        } else {
+          pumpColor2 = Colors.red;
+        }
+      });
+    }).catchError((error) {
+      print('Error fetching pump color: $error');
+    });
+    fetchLastDataColor3(2135844,'LIFRJCH2UKWR1PYD').then((data) {
+      setState(() {
+        if (data.compareTo("700") < 0) {
+          pumpColor3 = Colors.green;
+        } else {
+          pumpColor3 = Colors.red;
+        }
+      });
+    }).catchError((error) {
+      print('Error fetching pump color: $error');
+    });
+    fetchPumpStatus3( 2135844,'LIFRJCH2UKWR1PYD');
+    fetchPumpStatus2(2135843,'UC6JISI0UASBNZ9T');
+    fetchPumpStatus1(2135841,'7SYVVV6AFB6OP1KG');
 
-    fetchLastDataColor2(2135843, 'UC6JISI0UASBNZ9T');
-    fetchLastDataColor3(2135844, 'LIFRJCH2UKWR1PYD');
-    fetchPumpStatus(2135844, 'LIFRJCH2UKWR1PYD', isPump3on);
-    fetchPumpStatus(2135844, 'UC6JISI0UASBNZ9T', isPump2on);
-    fetchPumpStatus(2135844, '7SYVVV6AFB6OP1KG', isPump1on);
   }
 
   Widget build(BuildContext context) {
@@ -189,7 +208,7 @@ class _homepageState extends State<homepage> {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       print("${data['field1']}");
-if(data['field1'].compareTo("500")>0)
+if(data['field1'].compareTo("700")<0)
   pumpColor1=Colors.green;
 else
   pumpColor1=Colors.red;
@@ -209,7 +228,7 @@ print("pump color is:${pumpColor1}");
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       print("${data['field1']}");
-      if(data['field1'].compareTo("500")>0)
+      if(data['field1'].compareTo("700")<0)
         pumpColor2=Colors.green;
       else
         pumpColor2=Colors.red;
@@ -228,7 +247,7 @@ print("pump color is:${pumpColor1}");
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       print("${data['field1']}");
-      if(data['field1'].compareTo("500")>0)
+      if(data['field1'].compareTo("700")<0)
         pumpColor3=Colors.green;
       else
         pumpColor3=Colors.red;
@@ -240,20 +259,53 @@ print("pump color is:${pumpColor1}");
   }
 
 
-  Future<bool> fetchPumpStatus(int chanelId,String readAPI,bool isPumpon) async {
+  Future<bool> fetchPumpStatus2(int chanelId,String readAPI) async {
     final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${readAPI}&results=1'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final pumpStatus = data['field2'];
       print("PumpStatus${pumpStatus}");
-      isPumpon= pumpStatus == '1';
+      isPump2on= pumpStatus == '1';
+      return pumpStatus == '1';
+    } else {
+      throw Exception('Failed to fetch pump status');
+    }
+  }
+
+
+  Future<bool> fetchPumpStatus3(int chanelId,String readAPI) async {
+    final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${readAPI}&results=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final pumpStatus = data['field2'];
+      print("PumpStatus${pumpStatus}");
+      isPump3on= pumpStatus == '1';
+      return pumpStatus == '1';
+    } else {
+      throw Exception('Failed to fetch pump status');
+    }
+  }
+
+
+  Future<bool> fetchPumpStatus1(int chanelId,String readAPI) async {
+    final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/${chanelId}/fields/2/last.json?api_key=${readAPI}&results=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final pumpStatus = data['field2'];
+      print("PumpStatus${pumpStatus}");
+      isPump1on= pumpStatus == '1';
       return pumpStatus == '1';
     } else {
       throw Exception('Failed to fetch pump status');
     }
   }
 }
+
+
+
 
 /*  @override
   void initState() {
